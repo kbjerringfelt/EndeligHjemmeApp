@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".PsychiatristActivity"
+            android:exported="true" />
+        <activity
+            android:name=".LogInActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GroupListActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
