@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class PsychiatristActivity extends AppCompatActivity {
+public class PsychListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_psychiatrist);
+        setContentView(R.layout.activity_psychologist);
     }
 }
