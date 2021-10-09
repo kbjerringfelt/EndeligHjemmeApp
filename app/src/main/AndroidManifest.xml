@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="true" />
+        <activity
             android:name=".PsychListActivity"
             android:exported="true" />
         <activity

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EndeligHjemmeApp</string>
+    <string name="SwitchFaceId">Face ID</string>
+    <string name="SwitchTouchId">Touch ID</string>
+    <string name="nameTxt">Name:</string>
+    <string name="specialtyTxt">Specialty:</string>
+    <string name="zipcodeTxt">Zipcode:</string>
+    <string name="insuranceTxt">Health insurance covered:</string>
+    <string name="backBtn">Back</string>
+    <string name="descriptionTxt">Short description:</string>
+    <string name="link_txt">Link:</string>
 </resources>
