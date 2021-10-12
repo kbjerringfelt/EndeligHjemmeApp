@@ -3,13 +3,14 @@ package dk.au.au339038.bachelorprojekt.endelighjemmeapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
 
 public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHolder>{
 
@@ -21,7 +22,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         this.psychListener = psychListener;
     }
 
-    public void updateCouncellorList(ArrayList<IMHP> lists){
+    public void updateMHPList(ArrayList<IMHP> lists){
         mhpList = lists;
         notifyDataSetChanged();
     }
@@ -40,9 +41,9 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     @Override
     public void onBindViewHolder(@NonNull PsychViewHolder viewHolder, int position) {
         viewHolder.name.setText(mhpList.get(position).getName());
-        viewHolder.specialty.setText("" + mhpList.get(position).getYear());
-        viewHolder.insurance.setText("");
-        viewHolder.zip.setText("");
+        viewHolder.insurance.setText(mhpList.get(position).getInsurance());
+        viewHolder.zip.setText("" + mhpList.get(position).getZip());
+        viewHolder.specialty.setText(mhpList.get(position).getSpecialty());
 
     }
 
@@ -54,10 +55,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class PsychViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView name;
-        TextView specialty;
-        TextView zip;
-        TextView insurance;
+        TextView name, specialty, zip, insurance;
 
         IPsychItemClickedListener psychListener;
 
@@ -75,11 +73,11 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         }
         @Override
         public void onClick(View view) {
-            psychListener.onMovieClicked(getAdapterPosition());
+            psychListener.onPsychologistClicked(getAdapterPosition());
         }
     }
 
     public static interface IPsychItemClickedListener {
-        void onMovieClicked(int index);
+        void onPsychologistClicked(int index);
     }
 }

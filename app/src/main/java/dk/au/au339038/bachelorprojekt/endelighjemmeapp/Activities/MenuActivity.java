@@ -1,8 +1,10 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 

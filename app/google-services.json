@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232753662402",
+    "project_id": "bachelorprojekt-681b7",
+    "storage_bucket": "bachelorprojekt-681b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232753662402:android:9f75d4b46f5f07a01aee5b",
+        "android_client_info": {
+          "package_name": "dk.au.au339038.bachelorprojekt.endelighjemmeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232753662402-a7bn9lgpkfcbngp723pndl77vqhl7mu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVf-5OcyycUGzoHgkg46oY5JYJxtiu2qE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232753662402-a7bn9lgpkfcbngp723pndl77vqhl7mu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

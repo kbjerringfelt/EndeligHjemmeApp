@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Activities.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".Activities.MenuActivity"
             android:exported="true" />
         <activity
-            android:name=".PsychListActivity"
+            android:name=".Activities.PsychListActivity"
             android:exported="true" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".Activities.LogInActivity"
             android:exported="true" />
         <activity
-            android:name=".GroupListActivity"
+            android:name=".Activities.GroupListActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

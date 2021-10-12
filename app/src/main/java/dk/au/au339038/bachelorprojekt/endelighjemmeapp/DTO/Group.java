@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
 public class Group {
     private String groupName;
