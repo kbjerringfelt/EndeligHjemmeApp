@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void goToMenu() {
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, PsychListActivity.class);
         launcher.launch(intent);
     }
     //Også lavet ud fra samme metode i Test12 demo

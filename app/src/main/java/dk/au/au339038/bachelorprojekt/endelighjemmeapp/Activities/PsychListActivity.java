@@ -1,5 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,9 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+
 import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
@@ -19,7 +28,7 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
     private RecyclerView prcv;
     private PsychAdapter psychAdapter;
     private ArrayList<IMHP> psychologists;
-    //FirebaseFirestore db;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +47,19 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
     private void loadData() {
 
-  /*      db = FirebaseFirestore.getInstance();
+       db = FirebaseFirestore.getInstance();
    db.collection("psychologists").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+       @Override
+       public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+           for (DocumentChange dc : value.getDocumentChanges()){
+               if (dc.getType() == DocumentChange.Type.ADDED){
+                   psychologists.add(dc.getDocument().toObject(Psychologist.class));
+               }
+               psychAdapter.notifyDataSetChanged();
+           }
+       }
+   }); }
 
-                for (DocumentChange dc : value.getDocumentChanges()){
-                    if (dc.getType() == DocumentChange.Type.ADDED){
-                        psychologists.add(dc.getDocument().toObject(Psychologist.class));
-                    }
-                    psychAdapter.notifyDataSetChanged();
-                }
-            }
-        });*/
-    }
 
     @Override
     public void onPsychologistClicked(int index) {
