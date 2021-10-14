@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 
 public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHolder>{
 
-    private ArrayList<IMHP> mhpList;
+    private ArrayList<Psychologist> mhpList;
     private IPsychItemClickedListener psychListener;
 
 
@@ -22,7 +23,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         this.psychListener = psychListener;
     }
 
-    public void updateMHPList(ArrayList<IMHP> lists){
+    public void updateMHPList(ArrayList<Psychologist> lists){
         mhpList = lists;
         notifyDataSetChanged();
     }
