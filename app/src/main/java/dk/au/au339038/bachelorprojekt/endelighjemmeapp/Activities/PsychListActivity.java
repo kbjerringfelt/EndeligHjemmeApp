@@ -3,6 +3,9 @@ package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,10 +30,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels.PsychViewModel;
 
 // To get the data from Firebase I used this tutorial: https://www.youtube.com/watch?v=Az4gXQAP-a4
 public class PsychListActivity extends AppCompatActivity implements PsychAdapter.IPsychItemClickedListener {
@@ -38,41 +43,36 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
     public static final String TAG = "LogF";
     private RecyclerView prcv;
     private PsychAdapter psychAdapter;
+    private LiveData<ArrayList<Psychologist>> lpsychologists;
     private ArrayList<Psychologist> psychologists;
     FirebaseFirestore db;
     DatabaseReference mbase;
+    PsychViewModel pvm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_psychologist);
 
+        pvm = new ViewModelProvider(this).get(PsychViewModel.class);
+
+        db = FirebaseFirestore.getInstance();
         psychAdapter = new PsychAdapter(this);
         prcv = findViewById(R.id.rcv_psych);
         prcv.setLayoutManager(new LinearLayoutManager(this));
         prcv.setAdapter(psychAdapter);
 
         psychologists = new ArrayList<Psychologist>();
-        loadData();
-        psychAdapter.updateMHPList(psychologists);
-    }
 
-    private void loadData() {
-
-        db.collection("psychologists")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+        lpsychologists = pvm.getPsychologists();
+        lpsychologists.observe(this, new Observer<ArrayList<Psychologist>>() {
+            @Override
+            public void onChanged(ArrayList<Psychologist> psychs) {
+                psychAdapter.updateMHPList(psychs);
+                psychologists = psychs;
+            }
+        });
+        // psychAdapter.updateMHPList(psychologists);*/
     }
 
 
@@ -80,4 +80,5 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
     public void onPsychologistClicked(int index) {
 
     }
+
 }

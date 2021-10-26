@@ -50,7 +50,11 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
 
     @Override
     public int getItemCount() {
-        return mhpList.size();
+        if(mhpList == null){
+            return 0;
+        } else {
+            return mhpList.size();
+        }
     }
 
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
