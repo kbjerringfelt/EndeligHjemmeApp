@@ -1,7 +1,12 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -9,8 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +36,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
@@ -78,7 +86,16 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
     @Override
     public void onPsychologistClicked(int index) {
+        ArrayList<Psychologist> ml = lpsychologists.getValue();
+        showDialogue(ml.get(index));
+    }
 
+    //show a dialogue
+    private void showDialogue(Psychologist psychologist){
+       //create a dialogue popup - and show it
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(psychologist.getName());
+        builder.create().show();
     }
 
 }
