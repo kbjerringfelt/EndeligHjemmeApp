@@ -11,10 +11,9 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 @Database(entities = {Pin.class}, version = 1)
 public abstract class AppsDatabase extends RoomDatabase {
 
-    public abstract PinDAO personDAO();  //mandatory DAO getter
+    public abstract PinDAO pinDAO();  //mandatory DAO getter
     private static AppsDatabase instance; //database instance for singleton
 
-    //singleton pattern used, for lazy loading + single instance since db object is expensive
     public static AppsDatabase getDatabase(final Context context) {
         if (instance == null) {
             synchronized (AppsDatabase.class) {
@@ -22,7 +21,6 @@ public abstract class AppsDatabase extends RoomDatabase {
                     instance = Room.databaseBuilder(context.getApplicationContext(),
                             AppsDatabase.class, "database")
                             .fallbackToDestructiveMigration()
-                            //   .allowMainThreadQueries()   //Databases should always be accessed asynchronously in your apps! (see Repository class)
                             .build();
                 }
             }

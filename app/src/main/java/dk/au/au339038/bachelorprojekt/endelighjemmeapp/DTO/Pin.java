@@ -8,7 +8,7 @@ public class Pin {
 
     @PrimaryKey(autoGenerate = true)
     private int uid;
-    private int pincode;
+    private int pincode = 1000000;
 
     public Pin(int pincode){
         this.pincode = pincode;

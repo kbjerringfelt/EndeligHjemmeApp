@@ -16,13 +16,17 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Database.AppsDatabase;
 
 public class Repository {
-    FirebaseFirestore db;
+    private FirebaseFirestore fdb;
+    private AppsDatabase db;
     private ExecutorService executor;
     private static Repository instance;
-    MutableLiveData<ArrayList<Psychologist>> psychs;
+    private MutableLiveData<ArrayList<Psychologist>> psychs;
+    private LiveData<Pin> pin;
 
     public static Repository getInstance(){
         if(instance==null){
@@ -33,21 +37,40 @@ public class Repository {
 
     //constructor - takes Application object for context
     private Repository(){
-        db = FirebaseFirestore.getInstance();
+        db = AppsDatabase.getDatabase(FHApplication.getAppContext());
+        fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
+        pin = db.pinDAO().getPin();
         loadData();
 
     }
 
     public LiveData<ArrayList<Psychologist>> getPsychologists(){
-        if(psychs==null){
-            psychs = new MutableLiveData<ArrayList<Psychologist>>();
-        }
+       // if(psychs==null){
+       //     psychs = new MutableLiveData<ArrayList<Psychologist>>();
+       // }
         return psychs;
     }
 
+    public LiveData<Pin> getPin(){
+        if(pin == null){
+            pin = new MutableLiveData<Pin>();
+        }
+        return pin;
+    }
+
+    public void setPinAsynch(Pin p){
+
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.pinDAO().insertPin(p);
+            }
+        });
+    }
+
     private void loadData() {
-        db.collection("psychologists")
+        fdb.collection("psychologists")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -58,6 +81,9 @@ public class Repository {
                                 if(p!=null){
                                     updatedPsychologists.add(p);
                                 }
+                            }
+                            if(psychs==null){
+                                psychs = new MutableLiveData<ArrayList<Psychologist>>();
                             }
                             psychs.setValue(updatedPsychologists);
                         }
