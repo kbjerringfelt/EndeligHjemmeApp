@@ -1,16 +1,25 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels.LogInViewModel;
 
@@ -20,6 +29,7 @@ public class LogInActivity extends AppCompatActivity {
     private LiveData<Pin> pin;
     private int _pin;
     private Button logInButton;
+    private EditText pinText;
 
 
 
@@ -29,6 +39,7 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         logInButton = findViewById(R.id.logInBtn);
+        pinText = findViewById(R.id.pinText);
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
@@ -41,6 +52,52 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
+        logInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pin = Integer.parseInt(pinText.getText().toString());
+                int i = validatePin(pin);
+                if(i == 1){
+                    goToMain();
+                }
+                if(i == 0){
+                    Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+
+    }
+
+    private void goToMain() {
+        Intent i = new Intent(this, MainActivity.class);
+        // Bundle b = new Bundle();
+        // b.putSerializable("Title", title);
+        // i.putExtras(b);
+        launcher.launch(i);
+    }
+    //Also from Test12 demo
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        //                      Intent data = result.getData();
+                        //                    movielist = lvm.getMovies();
+                        //                  movieAdapter.updateMovieList(movielist.getValue());
+                    }
+                }
+            });
+
+    private int validatePin(int pin) {
+        if(pin == _pin){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     private void loadTestPin(Pin p){

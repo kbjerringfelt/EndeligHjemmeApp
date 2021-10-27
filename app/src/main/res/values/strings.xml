@@ -9,4 +9,6 @@
     <string name="backBtn">Back</string>
     <string name="descriptionTxt">Short description:</string>
     <string name="link_txt">Link:</string>
+    <string name="login_btn">Sign in</string>
+    <string name="wrong_pin">Wrong pin, try again.</string>
 </resources>
