@@ -15,7 +15,7 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button psych;
+    Button psych, group;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

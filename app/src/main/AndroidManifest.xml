@@ -28,9 +28,6 @@
             android:name=".Activities.PsychListActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".Activities.GroupListActivity"
             android:exported="true" />
         <activity

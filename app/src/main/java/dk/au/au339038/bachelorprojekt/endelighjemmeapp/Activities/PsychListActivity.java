@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 
@@ -83,6 +85,25 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         // psychAdapter.updateMHPList(psychologists);*/
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_top,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.bar_menu) {
+            Intent i = new Intent(PsychListActivity.this, MenuActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onPsychologistClicked(int index) {

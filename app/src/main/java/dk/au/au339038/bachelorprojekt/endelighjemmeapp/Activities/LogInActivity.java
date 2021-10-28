@@ -59,7 +59,7 @@ public class LogInActivity extends AppCompatActivity {
                 int i = validatePin(pin);
                 if(i == 1){
                     goToMain();
-                    finish();
+                    //finish();
                 }
                 if(i == 0){
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();

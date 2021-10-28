@@ -1,6 +1,5 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_home, R.id.navigation_chat, R.id.navigation_calendar, R.id.navigation_mood)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -61,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(FHApplication.getAppContext(),"No",Toast.LENGTH_SHORT);
+        Toast.makeText(FHApplication.getAppContext(),"No",Toast.LENGTH_SHORT).show();
     }
 
 }
