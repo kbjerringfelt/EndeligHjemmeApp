@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools ="http://schemas.android.com/tools"
+    tools:context="dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.MainActivity">
+
+    <item
+        android:id="@+id/bar_menu"
+        android:icon="@drawable/ic_baseline_menu_24"
+        android:title="Psych"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+
+</menu>

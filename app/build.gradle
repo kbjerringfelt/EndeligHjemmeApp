@@ -58,5 +58,10 @@ dependencies {
     implementation 'androidx.room:room-guava:2.3.0'
     annotationProcessor 'androidx.room:room-compiler:2.3.0'
     implementation 'com.google.guava:guava:27.0.1-android'
+
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+
 }
 
