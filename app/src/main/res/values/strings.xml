@@ -11,4 +11,8 @@
     <string name="link_txt">Link:</string>
     <string name="login_btn">Sign in</string>
     <string name="wrong_pin">Wrong pin, try again.</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

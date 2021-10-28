@@ -59,6 +59,7 @@ public class LogInActivity extends AppCompatActivity {
                 int i = validatePin(pin);
                 if(i == 1){
                     goToMain();
+                    finish();
                 }
                 if(i == 0){
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
@@ -71,7 +72,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void goToMain() {
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, HomeActivity.class);
         // Bundle b = new Bundle();
         // b.putSerializable("Title", title);
         // i.putExtras(b);
