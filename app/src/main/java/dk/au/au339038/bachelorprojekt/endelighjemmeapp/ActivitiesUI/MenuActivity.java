@@ -13,11 +13,12 @@ import android.widget.Button;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.settings.SettingsActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button psych, group;
+    Button psych, group, settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,19 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        settings = findViewById(R.id.list_btn_settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToSettings();
+            }
+        });
+
+    }
+
+    private void goToSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        launcher.launch(intent);
     }
 
     private void goToGroup() {
@@ -64,4 +78,5 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 }
             });
+
 }

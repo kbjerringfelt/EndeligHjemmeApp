@@ -95,7 +95,16 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
        //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(psychologist.getName())
-        .setMessage(psychologist.getPhone() + "\n" + psychologist.getPrice()  + "\n" + psychologist.getCity()  + "\n" + psychologist.getEducation() + "\n" + psychologist.getMoreinfo());
+        .setMessage(getText(R.string.phonetxt) +" " +psychologist.getPhone() + "\n\n" +
+                getText(R.string.pricetxt) +" " + psychologist.getPrice() + "\n\n" +
+                getText(R.string.cityTxt) +" " + psychologist.getCity() + "\n\n" +
+                getText(R.string.educationtxt) +" " + psychologist.getEducation() + "\n\n" +
+                getText(R.string.sextxt) +" " + psychologist.getSex()+ "\n\n" +
+                getText(R.string.insuranceTxt) +" " + psychologist.getInsurance() + "\n\n" +
+                getText(R.string.languagetxt) +" " + psychologist.getLanguage() + "\n\n" +
+                getText(R.string.disabilitytxt) +" " + psychologist.getDisability() + "\n\n" +
+                getText(R.string.specialtyTxt) +"\n" + psychologist.getSpecialty() + "\n\n" +
+                getText(R.string.moreinfo) +"\n" + psychologist.getMoreinfo());
         builder.create().show();
     }
 

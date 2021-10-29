@@ -9,11 +9,14 @@
     <application
         android:name=".FHApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_menu"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_menu_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
+        <activity
+            android:name=".SupportActivity"
+            android:exported="false" />
         <activity
             android:name=".ActivitiesUI.HomeActivity"
             android:exported="false"

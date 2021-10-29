@@ -9,19 +9,12 @@ public class Psychologist implements IMHP {
 
     public Psychologist(){}
 
-    public Psychologist(String name, String specialty, String insurance, int zip, String city, String disability, String education, String language, String moreinfo, String sex, int phone, int price){
+    public Psychologist(String name, String specialty, String insurance, String city){
         this.name = name;
         this.specialty = specialty;
         this.insurance = insurance;
-        this.zip = zip;
         this.city = city;
-        this.disability = disability;
-        this.education = education;
-        this.language = language;
-        this.moreinfo = moreinfo;
-        this.sex = sex;
-        this.phone = phone;
-        this.price = price;
+
 
     }
 

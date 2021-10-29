@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 
 public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHolder>{
@@ -43,7 +42,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     public void onBindViewHolder(@NonNull PsychViewHolder viewHolder, int position) {
         viewHolder.name.setText(mhpList.get(position).getName());
         viewHolder.insurance.setText(mhpList.get(position).getInsurance());
-        viewHolder.zip.setText("" + mhpList.get(position).getZip());
+        viewHolder.city.setText("" + mhpList.get(position).getCity());
 
     }
 
@@ -59,7 +58,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class PsychViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView name, specialty, zip, insurance;
+        TextView name, specialty, city, insurance;
 
         IPsychItemClickedListener psychListener;
 
@@ -67,7 +66,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
             super(itemView);
 
             name = itemView.findViewById(R.id.name_input);
-            zip = itemView.findViewById(R.id.zipcode_input);
+            city = itemView.findViewById(R.id.city_input);
             insurance = itemView.findViewById(R.id.insurance_input);
 
             psychListener = psychItemClickedListener;

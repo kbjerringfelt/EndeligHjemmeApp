@@ -21,43 +21,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/description_txt"
+        android:id="@+id/bdate_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
-        android:text="@string/descriptionTxt"
+        android:text="@string/bdateTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/group_txt" />
 
     <TextView
-        android:id="@+id/description_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/description_txt"
-        app:layout_constraintTop_toTopOf="@+id/description_txt" />
-
-    <TextView
-        android:id="@+id/link_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/link_txt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_txt" />
-
-    <TextView
-        android:id="@+id/link_input"
+        android:id="@+id/bdate_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -67,6 +42,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/link_txt"
-        app:layout_constraintTop_toTopOf="@+id/link_txt" />
+        app:layout_constraintStart_toEndOf="@+id/bdate_txt"
+        app:layout_constraintTop_toTopOf="@+id/bdate_txt" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,13 +2,25 @@
     <string name="app_name">EndeligHjemmeApp</string>
     <string name="SwitchFaceId">Face ID</string>
     <string name="SwitchTouchId">Touch ID</string>
-    <string name="nameTxt">Name:</string>
-    <string name="specialtyTxt">Specialty:</string>
-    <string name="zipcodeTxt">Zipcode:</string>
-    <string name="insuranceTxt">Health insurance covered:</string>
+    <string name="nameTxt"><b>Name:</b></string>
+    <string name="specialtyTxt"><b>Specialty:</b></string>
+    <string name="zipcodeTxt"><b>Zipcode:</b></string>
+    <string name="cityTxt"><b>City:</b></string>
+    <string name="moreinfo"><b>More information:</b></string>
+    <string name="disabilitytxt"><b>Disability friendly:</b></string>
+    <string name="languagetxt"><b>Language:</b></string>
+    <string name="phonetxt"><b>Phone number:</b></string>
+    <string name="pricetxt"><b>Price:</b></string>
+    <string name="educationtxt"><b>Education:</b></string>
+    <string name="sextxt"><b>Sex:</b></string>
+    <string name="insuranceTxt"><b>Health insurance covered:</b></string>
+
     <string name="backBtn">Back</string>
-    <string name="descriptionTxt">Short description:</string>
-    <string name="link_txt">Link:</string>
+    <string name="descriptionTxt">Description:</string>
+    <string name="title_txt">Title:</string>
+    <string name="contactTxt">Contact:</string>
+    <string name="place_txt">Meeting place:</string>
+
     <string name="login_btn">Sign in</string>
     <string name="wrong_pin">Wrong pin, try again.</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -24,4 +36,11 @@
     <string name="btn_settings">Settings</string>
     <string name="not_implemented">Not implemented yet.</string>
     <string name="welcome">Welcome </string>
+    <string name="bdateTxt">Birthdate: </string>
+    <string name="signOutBtn">Sign out</string>
+    <string name="faceId">Face ID</string>
+    <string name="touchId">Touch ID</string>
+    <string name="supportTxt">Support</string>
+    <string name="areaBtn">Change area</string>
+    <string name="childBtn">Change info about child</string>
 </resources>

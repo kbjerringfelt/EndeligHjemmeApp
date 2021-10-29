@@ -6,33 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".ActivitiesUI.settings.SettingsActivity">
 
-    <Switch
-        android:id="@+id/switchTouch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:minHeight="48dp"
-        android:text="@string/SwitchTouchId"
+    <ScrollView
+        android:layout_width="411dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="16dp"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/signOut_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="229dp" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Switch
-        android:id="@+id/switchFace"
-        android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/areaBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/areaBtn" />
+
+            <Switch
+                android:id="@+id/faceId_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dip"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="@string/faceId" />
+
+            <Switch
+                android:id="@+id/touchIdSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dip"
+                android:padding="4dp"
+                android:text="@string/touchId" />
+
+            <Button
+                android:id="@+id/childBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/childBtn" />
+
+            <Button
+                android:id="@+id/supportBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/supportTxt" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/signOut_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:minHeight="48dp"
-        android:text="@string/SwitchFaceId"
-        app:layout_constraintBottom_toTopOf="@+id/switchTouch"
+        android:layout_marginBottom="24dp"
+        android:text="@string/signOutBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/nameTxt"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,29 +56,28 @@
         app:layout_constraintTop_toTopOf="@+id/insurance_txt" />
 
     <TextView
-        android:id="@+id/zipcode_txt"
+        android:id="@+id/city_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/zipcodeTxt"
+        android:text="@string/cityTxt"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/insurance_txt" />
 
     <TextView
-        android:id="@+id/zipcode_input"
+        android:id="@+id/city_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/zipcodeTxt"
+        android:hint="@string/cityTxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zipcode_txt"
-        app:layout_constraintTop_toTopOf="@+id/zipcode_txt" />
+        app:layout_constraintStart_toEndOf="@+id/city_txt"
+        app:layout_constraintTop_toTopOf="@+id/city_txt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

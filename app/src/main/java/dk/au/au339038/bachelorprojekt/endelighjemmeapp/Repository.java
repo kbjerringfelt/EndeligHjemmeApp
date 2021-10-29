@@ -43,9 +43,11 @@ public class Repository {
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
         pin = db.pinDAO().getPin();
-        loadData();
+        loadPsychData();
+        loadGroupData();
 
     }
+
 
     public LiveData<ArrayList<Psychologist>> getPsychologists(){
        // if(psychs==null){
@@ -78,7 +80,7 @@ public class Repository {
         });
     }
 
-    private void loadData() {
+    private void loadPsychData() {
         fdb.collection("psychologists")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -99,14 +101,17 @@ public class Repository {
                     }
                 });
 
- /*       fdb.collection("groups")
+
+    }
+    private void loadGroupData() {
+                fdb.collection("groups")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
                         ArrayList<Group> updatedGroups = new ArrayList<>();
-                        if(value != null && !value.isEmpty()){
-                            for(DocumentSnapshot doc : value.getDocuments()){
-                                Group g = doc.toObject(Group.class);
+                        if(valueg != null && !valueg.isEmpty()){
+                            for(DocumentSnapshot docg : valueg.getDocuments()){
+                                Group g = docg.toObject(Group.class);
                                 if(g!=null){
                                     updatedGroups.add(g);
                                 }
@@ -117,8 +122,7 @@ public class Repository {
                             groups.setValue(updatedGroups);
                         }
                     }
-                });*/
-
+                });
     }
 
 }
