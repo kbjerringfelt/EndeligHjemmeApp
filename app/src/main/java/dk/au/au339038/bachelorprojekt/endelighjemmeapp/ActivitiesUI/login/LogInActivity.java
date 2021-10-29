@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.login;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -16,12 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.List;
-
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.HomeActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels.LogInViewModel;
 
 public class LogInActivity extends AppCompatActivity {
 
@@ -108,3 +106,5 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 }
+
+//Christina, barn 8 uger, hedder julie, født 28+4.

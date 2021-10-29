@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.ui.dashboard;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,26 +13,26 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.FragmentDashboardBinding;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.FragmentCalendarBinding;
 
-public class DashboardFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
-    private FragmentDashboardBinding binding;
+    private CalendarViewModel calendarViewModel;
+    private FragmentCalendarBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        calendarViewModel =
+                new ViewModelProvider(this).get(CalendarViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textNotifications;
+        calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                textView.setText(getText(R.string.not_implemented));
             }
         });
         return root;

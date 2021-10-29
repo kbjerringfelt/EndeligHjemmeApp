@@ -15,23 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
-            android:name=".Activities.HomeActivity"
+            android:name=".ActivitiesUI.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name=".ActivitiesUI.settings.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.MenuActivity"
+            android:name=".ActivitiesUI.MenuActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.PsychListActivity"
+            android:name=".ActivitiesUI.psychologist.PsychListActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.GroupListActivity"
+            android:name=".ActivitiesUI.group.GroupListActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.LogInActivity"
+            android:name=".ActivitiesUI.login.LogInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

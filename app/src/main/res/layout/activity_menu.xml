@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.MenuActivity">
+    tools:context=".ActivitiesUI.MenuActivity">
 
     <ScrollView
         android:layout_width="0dp"
@@ -20,20 +20,56 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/list_btn_psych"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
-                android:text="List of psychologists "
+                android:text="@string/list_btn_psych"
                 android:textColor="@color/black"
                 app:backgroundTint="@color/ic_menu_background" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/list_btn_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
-                android:text="List of sychologists "
+                android:text="@string/list_btn_group"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/ic_menu_background" />
+
+            <Button
+                android:id="@+id/list_btn_checklist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/btn_checklist"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/ic_menu_background" />
+
+            <Button
+                android:id="@+id/list_btn_advice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/btn_advice"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/ic_menu_background" />
+
+            <Button
+                android:id="@+id/list_btn_babyweek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/btn_babyweek"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/ic_menu_background" />
+
+            <Button
+                android:id="@+id/list_btn_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/btn_settings"
                 android:textColor="@color/black"
                 app:backgroundTint="@color/ic_menu_background" />
 

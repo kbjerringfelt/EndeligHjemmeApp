@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupListActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
@@ -21,20 +23,35 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        psych = findViewById(R.id.button);
+        psych = findViewById(R.id.list_btn_psych);
         psych.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToMenu();
+                goToPsychActivity();
+            }
+        });
+
+        group = findViewById(R.id.list_btn_group);
+        group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToGroup();
             }
         });
 
     }
 
-    private void goToMenu() {
+    private void goToGroup() {
+        Intent intent = new Intent(this, GroupListActivity.class);
+        launcher.launch(intent);
+    }
+
+    private void goToPsychActivity() {
         Intent intent = new Intent(this, PsychListActivity.class);
         launcher.launch(intent);
     }
+
+
     //Også lavet ud fra samme metode i Test12 demo
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

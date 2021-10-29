@@ -16,4 +16,12 @@
     <string name="title_chat">Chat</string>
     <string name="title_calendar">Calendar</string>
     <string name="title_mood">Mood</string>
+    <string name="list_btn_psych">List of psychologists</string>
+    <string name="list_btn_group">List of supportgroups</string>
+    <string name="btn_checklist">Checklist</string>
+    <string name="btn_advice">Some good advice</string>
+    <string name="btn_babyweek">Baby this week</string>
+    <string name="btn_settings">Settings</string>
+    <string name="not_implemented">Not implemented yet.</string>
+    <string name="welcome">Welcome </string>
 </resources>

@@ -44,7 +44,6 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         viewHolder.name.setText(mhpList.get(position).getName());
         viewHolder.insurance.setText(mhpList.get(position).getInsurance());
         viewHolder.zip.setText("" + mhpList.get(position).getZip());
-        viewHolder.specialty.setText(mhpList.get(position).getSpecialty());
 
     }
 
@@ -68,7 +67,6 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
             super(itemView);
 
             name = itemView.findViewById(R.id.name_input);
-            specialty = itemView.findViewById(R.id.specialty_input);
             zip = itemView.findViewById(R.id.zipcode_input);
             insurance = itemView.findViewById(R.id.insurance_input);
 

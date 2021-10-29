@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Database.AppsDatabase;
@@ -26,6 +27,7 @@ public class Repository {
     private ExecutorService executor;
     private static Repository instance;
     private MutableLiveData<ArrayList<Psychologist>> psychs;
+    private MutableLiveData<ArrayList<Group>> groups;
     private LiveData<Pin> pin;
 
     public static Repository getInstance(){
@@ -50,6 +52,13 @@ public class Repository {
        //     psychs = new MutableLiveData<ArrayList<Psychologist>>();
        // }
         return psychs;
+    }
+
+    public LiveData<ArrayList<Group>> getGroups(){
+        // if(psychs==null){
+        //     psychs = new MutableLiveData<ArrayList<Psychologist>>();
+        // }
+        return groups;
     }
 
     public LiveData<Pin> getPin(){
@@ -89,6 +98,26 @@ public class Repository {
                         }
                     }
                 });
+
+ /*       fdb.collection("groups")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        ArrayList<Group> updatedGroups = new ArrayList<>();
+                        if(value != null && !value.isEmpty()){
+                            for(DocumentSnapshot doc : value.getDocuments()){
+                                Group g = doc.toObject(Group.class);
+                                if(g!=null){
+                                    updatedGroups.add(g);
+                                }
+                            }
+                            if(groups==null){
+                                groups = new MutableLiveData<ArrayList<Group>>();
+                            }
+                            groups.setValue(updatedGroups);
+                        }
+                    }
+                });*/
 
     }
 

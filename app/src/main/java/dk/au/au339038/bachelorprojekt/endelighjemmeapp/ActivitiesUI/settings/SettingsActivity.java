@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 

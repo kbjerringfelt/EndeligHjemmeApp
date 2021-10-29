@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

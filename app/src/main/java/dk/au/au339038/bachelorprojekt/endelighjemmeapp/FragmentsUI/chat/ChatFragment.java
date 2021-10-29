@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.ui.home;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.chat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,26 +13,26 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.FragmentHomeBinding;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.FragmentChatBinding;
 
-public class HomeFragment extends Fragment {
+public class ChatFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private ChatViewModel chatViewModel;
+    private FragmentChatBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        chatViewModel =
+                new ViewModelProvider(this).get(ChatViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentChatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        final TextView textView = binding.textDashboard;
+        chatViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                textView.setText(getText(R.string.not_implemented));
             }
         });
         return root;

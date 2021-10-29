@@ -1,16 +1,15 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.ui.notifications;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.mood;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotificationsViewModel extends ViewModel {
-
+public class MoodViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
-    public NotificationsViewModel() {
+    public MoodViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mText.setValue("This is mood fragment");
     }
 
     public LiveData<String> getText() {
