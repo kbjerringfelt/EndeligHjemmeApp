@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Endelig Hjemme</string>
+    <string name="SwitchFaceId">Face ID</string>
+    <string name="SwitchTouchId">Touch ID</string>
+    <string name="nameTxt"><b>Navn:</b></string>
+    <string name="specialtyTxt"><b>Speciale:</b></string>
+    <string name="zipcodeTxt"><b>Postnummer:</b></string>
+    <string name="cityTxt"><b>By:</b></string>
+    <string name="moreinfo"><b>Mere information:</b></string>
+    <string name="disabilitytxt"><b>Handicap venligt:</b></string>
+    <string name="languagetxt"><b>Sprog:</b></string>
+    <string name="phonetxt"><b>Telefonnummer:</b></string>
+    <string name="pricetxt"><b>Pris:</b></string>
+    <string name="educationtxt"><b>Uddannelse:</b></string>
+    <string name="sextxt"><b>Køn:</b></string>
+    <string name="insuranceTxt"><b>Tilskud fra sygesikring:</b></string>
+
+    <string name="backBtn">Tilbage</string>
+    <string name="descriptionTxt">Beskrivelse:</string>
+    <string name="title_txt">Titel:</string>
+    <string name="contactTxt">Kontakt:</string>
+    <string name="place_txt">Mødested:</string>
+
+    <string name="login_btn">Log ind</string>
+    <string name="wrong_pin">Forkert Pin, prøv igen.</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Hjem</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_calendar">Kalender</string>
+    <string name="title_mood">Humør</string>
+    <string name="list_btn_psych">Liste med psychologer</string>
+    <string name="list_btn_group">Liste med supportgrupper</string>
+    <string name="btn_checklist">Tjekliste</string>
+    <string name="btn_advice">Nogen gode råd</string>
+    <string name="btn_babyweek">Baby i denne uge</string>
+    <string name="btn_settings">Indstillinger</string>
+    <string name="not_implemented">ikke implementeret endnu.</string>
+    <string name="welcome">Velkommen</string>
+    <string name="bdateTxt">Fødselsdag: </string>
+    <string name="signOutBtn">Log ud</string>
+    <string name="faceId">Face ID</string>
+    <string name="touchId">Touch ID</string>
+    <string name="supportTxt">Support</string>
+    <string name="areaBtn">Ændre kommune</string>
+    <string name="childBtn">Ændre information om barn</string>
+    <string name="linkTxt">FAQ om denne app:</string>
+    <string name="supportContextTxt">Flere spørgsmål?</string>
+    <string
+        name="faqLink"><a href="https://www.google.com/">FAQ</a></string>
+    <string name="enterPin">Skriv PIN</string>
+    <string name="enterPinTxt">Skriv PIN</string>
+
+</resources>

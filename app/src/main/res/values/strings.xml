@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EndeligHjemmeApp</string>
+    <string name="app_name">Finally Home</string>
     <string name="SwitchFaceId">Face ID</string>
     <string name="SwitchTouchId">Touch ID</string>
     <string name="nameTxt"><b>Name:</b></string>
@@ -34,7 +34,7 @@
     <string name="btn_advice">Some good advice</string>
     <string name="btn_babyweek">Baby this week</string>
     <string name="btn_settings">Settings</string>
-    <string name="not_implemented">Not implemented yet.</string>
+    <string name="not_implemented">not implemented yet.</string>
     <string name="welcome">Welcome </string>
     <string name="bdateTxt">Birthdate: </string>
     <string name="signOutBtn">Sign out</string>
@@ -43,4 +43,10 @@
     <string name="supportTxt">Support</string>
     <string name="areaBtn">Change area</string>
     <string name="childBtn">Change info about child</string>
+    <string name="linkTxt">FAQ about the app:</string>
+    <string name="supportContextTxt">Further questions?</string>
+    <string
+        name="faqLink"><a href="https://www.google.com/">FAQ</a></string>
+    <string name="enterPin">Enter PIN</string>
+    <string name="enterPinTxt">Enter PIN</string>
 </resources>

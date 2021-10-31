@@ -53,15 +53,21 @@ public class LogInActivity extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pin = Integer.parseInt(pinText.getText().toString());
-                int i = validatePin(pin);
-                if(i == 1){
-                    goToMain();
-                    //finish();
-                }
-                if(i == 0){
+                String s = pinText.getText().toString();
+                if(s.equals("")){
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    int pin = Integer.parseInt(s);
+                    int i = validatePin(pin);
+                    if (i == 1) {
+                        goToMain();
+                        //finish();
+                    }
+                    if (i == 0) {
+                        Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
 
+                    }
                 }
             }
         });
@@ -87,6 +93,9 @@ public class LogInActivity extends AppCompatActivity {
                         //                    movielist = lvm.getMovies();
                         //                  movieAdapter.updateMovieList(movielist.getValue());
                     }
+                    if (result.getResultCode() == RESULT_CANCELED) {
+                        pinText.setText("");
+                    }
                 }
             });
 
@@ -104,6 +113,11 @@ public class LogInActivity extends AppCompatActivity {
         Pin newp = new Pin(123456);
         lvm.setPin(newp);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
 

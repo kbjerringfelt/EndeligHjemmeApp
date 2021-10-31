@@ -10,15 +10,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.settings.SettingsActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button psych, group, settings;
+    Button psych, group, settings, adviceBtn, checklistBtn, thisWeekBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,33 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToSettings();
+            }
+        });
+
+        adviceBtn = findViewById(R.id.list_btn_advice);
+        adviceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.btn_advice)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        checklistBtn = findViewById(R.id.list_btn_checklist);
+        checklistBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(),getText(R.string.btn_checklist)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        thisWeekBtn = findViewById(R.id.list_btn_babyweek);
+        thisWeekBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.btn_babyweek)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -75,6 +104,11 @@ public class MenuActivity extends AppCompatActivity {
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
 
+                    }
+                    if (result.getResultCode() == RESULT_CANCELED) {
+                        Intent intent = new Intent();
+                        setResult(RESULT_CANCELED, intent);
+                        finish();
                     }
                 }
             });
