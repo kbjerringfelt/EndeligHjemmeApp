@@ -76,8 +76,6 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         int id = item.getItemId();
 
         if (id == R.id.bar_menu) {
-            Intent i = new Intent(PsychListActivity.this, MenuActivity.class);
-            startActivity(i);
             finish();
         }
 

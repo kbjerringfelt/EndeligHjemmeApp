@@ -20,7 +20,7 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button supportBtn, area, childEdit, signOut;
+    private Button supportBtn, area, childEdit;
     private Switch touch, face;
 
     @Override
@@ -52,19 +52,11 @@ public class SettingsActivity extends AppCompatActivity {
                 Toast.makeText(FHApplication.getAppContext(), getText(R.string.childBtn)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
-
-        signOut = findViewById(R.id.btnSignOut);
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLogIn();
-            }
-        });
     }
 
     private void goToLogIn(){
         Intent intent = new Intent();
-        setResult(RESULT_CANCELED, intent);
+        intent.putExtra("IntResult", 1);
         finish();
     }
 

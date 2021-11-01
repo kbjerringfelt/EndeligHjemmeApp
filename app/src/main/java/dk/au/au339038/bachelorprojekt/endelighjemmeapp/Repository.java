@@ -101,6 +101,7 @@ public class Repository {
                                 Psychologist p = doc.toObject(Psychologist.class);
                                 if(p!=null){
                                     updatedPsychologists.add(p);
+                                    Log.d(TAG, "DocumentSnapshot data: " + doc.getData());
                                 }
                             }
                             if(psychs==null){
@@ -125,6 +126,7 @@ public class Repository {
                                 if(g!=null){
                                     updatedGroups.add(g);
                                 }
+                                Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
                             }
                             if(groups==null){
                                 groups = new MutableLiveData<ArrayList<Group>>();

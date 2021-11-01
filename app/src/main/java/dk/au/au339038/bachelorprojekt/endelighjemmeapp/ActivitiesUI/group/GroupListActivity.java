@@ -75,8 +75,6 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         int id = item.getItemId();
 
         if (id == R.id.bar_menu) {
-            Intent i = new Intent(GroupListActivity.this, MenuActivity.class);
-            startActivity(i);
             finish();
         }
 

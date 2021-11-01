@@ -64,12 +64,6 @@
                 android:gravity="left"
                 android:text="@string/supportTxt" />
 
-            <Button
-                android:id="@+id/btnSignOut"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sign out" />
-
         </LinearLayout>
     </ScrollView>
 

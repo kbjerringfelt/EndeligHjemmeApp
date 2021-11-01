@@ -94,6 +94,12 @@ public class MenuActivity extends AppCompatActivity {
         launcher.launch(intent);
     }
 
+    private void goToLogIn(){
+        Intent intent = new Intent();
+        intent.putExtra("IntResult", 1);
+        finish();
+    }
+
 
     //Også lavet ud fra samme metode i Test12 demo
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -105,9 +111,9 @@ public class MenuActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
                     }
-                    if (result.getResultCode() == RESULT_CANCELED) {
+                    if (result.getResultCode() == RESULT_FIRST_USER) {
                         Intent intent = new Intent();
-                        setResult(RESULT_CANCELED, intent);
+                        setResult(RESULT_FIRST_USER, intent);
                         finish();
                     }
                 }

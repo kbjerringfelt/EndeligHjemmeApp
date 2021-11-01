@@ -73,9 +73,9 @@ public class HomeActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
                     }
-                    if(result.getResultCode() == RESULT_CANCELED) {
+                    if(result.getResultCode() == RESULT_FIRST_USER) {
                         Intent intent = new Intent();
-                        setResult(RESULT_CANCELED, intent);
+                        setResult(RESULT_FIRST_USER, intent);
                         finish();
                     }
                 }
