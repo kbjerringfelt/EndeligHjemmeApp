@@ -1,8 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.IMHP;
-
-public class Psychologist implements IMHP {
+public class Psychologist {
     private String name, specialty, insurance, city, disability, education, language, moreinfo, sex;
     private long zip, phone, price;
 

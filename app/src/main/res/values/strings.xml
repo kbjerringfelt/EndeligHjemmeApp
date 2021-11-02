@@ -52,4 +52,9 @@
     <string name="saveBtn">Save</string>
     <string name="wishBtn">Wishes for the app? Contact us here:</string>
     <string name="wishButton">Send wish</string>
+
+    <string name="saveDialog">You have already added mood today. Want to override?</string>
+    <string name="saveMood">Save mood</string>
+    <string name="cancel">Cancel</string>
+    <string name="saveAnyway">Save anyway</string>
 </resources>

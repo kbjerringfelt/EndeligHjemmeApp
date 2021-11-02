@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -17,11 +19,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Support;
@@ -36,6 +43,7 @@ public class Repository {
     private MutableLiveData<ArrayList<Psychologist>> psychs;
     private MutableLiveData<ArrayList<Group>> groups;
     private MutableLiveData<Support> support;
+    private MutableLiveData<Mood> mood;
     private LiveData<Pin> pin;
 
     public static Repository getInstance(){
@@ -55,6 +63,11 @@ public class Repository {
         loadGroupData();
         loadSupportData();
 
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String dateOnly = dateFormat.format(currentDate);
+        loadMood(dateOnly);
+
     }
 
 
@@ -69,6 +82,9 @@ public class Repository {
     public LiveData<Support> getSupport(){
         return support;
     }
+
+    public MutableLiveData<Mood> getMood() {return mood;}
+
 
 
 
@@ -160,7 +176,60 @@ public class Repository {
                 }
             }
         });
+    }
 
+    private void loadMood(String date) {
+        DocumentReference docRef = fdb.collection("mood").document(date);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Mood m = document.toObject(Mood.class);
+                        if(m!=null){
+                            if(mood==null){
+                                mood = new MutableLiveData<Mood>();
+                            }
+                            mood.setValue(m);
+                        }
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+             /*   .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if(mood==null){
+                            mood = new MutableLiveData<Mood>();
+                        }
+                        Mood m = new Mood(11);
+                        mood.setValue(m);
+                    }
+                });*/
+    }
+
+    public void saveMood(String date, int currentMood){
+        Map<String, Object> mood = new HashMap<>();
+        mood.put("mood", currentMood);
+        fdb.collection("mood").document(date)
+                .set(mood)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
 

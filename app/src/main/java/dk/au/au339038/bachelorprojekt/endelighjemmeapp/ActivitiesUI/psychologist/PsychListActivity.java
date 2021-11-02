@@ -34,8 +34,6 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
     private PsychAdapter psychAdapter;
     private LiveData<ArrayList<Psychologist>> lpsychologists;
     private ArrayList<Psychologist> psychologists;
-    FirebaseFirestore db;
-    DatabaseReference mbase;
     PsychViewModel pvm;
 
     @Override
@@ -45,7 +43,6 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
         pvm = new ViewModelProvider(this).get(PsychViewModel.class);
 
-        db = FirebaseFirestore.getInstance();
         psychAdapter = new PsychAdapter(this);
         prcv = findViewById(R.id.rcv_psych);
         prcv.setLayoutManager(new LinearLayoutManager(this));

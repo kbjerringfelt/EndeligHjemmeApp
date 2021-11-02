@@ -55,9 +55,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void goToLogIn(){
-        Intent intent = new Intent();
+        /*Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("IntResult", 1);
-        finish();
+        finish();*/
     }
 
     private void goToSupportActivity() {
