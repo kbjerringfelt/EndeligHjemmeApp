@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +41,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     FirebaseFirestore db;
     DatabaseReference mbase;
     GroupViewModel gvm;
+    private Button createBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,14 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
             public void onChanged(ArrayList<Group> ngroups) {
                 groupAdapter.updateMHPList(ngroups);
                 groups = ngroups;
+            }
+        });
+
+        createBtn = findViewById(R.id.createBtn);
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.createBtn)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
     }

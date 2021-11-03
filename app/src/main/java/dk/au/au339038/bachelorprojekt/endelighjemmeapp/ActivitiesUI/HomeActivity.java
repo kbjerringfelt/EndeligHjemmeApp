@@ -84,7 +84,8 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(FHApplication.getAppContext(),"No",Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(FHApplication.getAppContext(),"No",Toast.LENGTH_SHORT).show();
     }
 
 }
