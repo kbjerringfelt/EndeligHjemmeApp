@@ -58,5 +58,6 @@
     <string name="saveMood">Gem humør</string>
     <string name="cancel">Annuller</string>
     <string name="saveAnyway">Gem alligevel</string>
+    <string name="moodSaved">Humøret er gemt.</string>
 
 </resources>

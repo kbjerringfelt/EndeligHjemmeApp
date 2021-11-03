@@ -179,7 +179,7 @@ public class Repository {
     }
 
     private void loadMood(String date) {
-        DocumentReference docRef = fdb.collection("mood").document(date);
+       /* DocumentReference docRef = fdb.collection("mood").document(date);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -200,17 +200,35 @@ public class Repository {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }
-        });
-             /*   .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if(mood==null){
+        });*/
+        final DocumentReference docRef = fdb.collection("mood").document(date);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    Mood m = snapshot.toObject(Mood.class);
+                    if(m!=null) {
+                        if (mood == null) {
                             mood = new MutableLiveData<Mood>();
                         }
-                        Mood m = new Mood(11);
                         mood.setValue(m);
                     }
-                });*/
+
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
     }
 
     public void saveMood(String date, int currentMood){

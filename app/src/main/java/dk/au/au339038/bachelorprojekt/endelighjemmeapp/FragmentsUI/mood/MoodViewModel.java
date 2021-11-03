@@ -19,13 +19,10 @@ public class MoodViewModel extends ViewModel {
 
     public MoodViewModel(){
         repository = Repository.getInstance();
-
-
+        mood = repository.getMood();
     }
 
     public LiveData<Mood> getMood() {
-        mood = repository.getMood();
-
         if(mood == null){
             mood = new MutableLiveData<Mood>();
             Mood defaultMood = new Mood(11);
@@ -34,8 +31,8 @@ public class MoodViewModel extends ViewModel {
         return mood;
     }
 
-    public void setMood(MutableLiveData<Mood> mood) {
-        this.mood = mood;
+    public void setMood(Mood mood) {
+        this.mood.setValue(mood);
     }
 
     public void saveMood(String date, Mood m){

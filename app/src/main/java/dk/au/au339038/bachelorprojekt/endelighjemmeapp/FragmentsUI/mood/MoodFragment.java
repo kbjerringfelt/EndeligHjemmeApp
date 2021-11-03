@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class MoodFragment extends Fragment {
     private MoodFragmentBinding binding;
     private ImageView moodImage;
     private int n;
+    private int im;
     private String date;
     private LiveData<Mood> thisMood;
     private Mood moodToday;
@@ -81,7 +83,7 @@ public class MoodFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Mood m) {
                 moodToday = m;
-                int im = moodToday.getMood();
+                im = moodToday.getMood();
                 if(im !=11) {
                     updateUI(im);
                 }
@@ -138,6 +140,8 @@ public class MoodFragment extends Fragment {
 
     private void saveMood(Mood m) {
         mvm.saveMood(dateOnly, m);
+        im = moodSkb.getProgress();
+        Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
     }
 
     private void updateUI(int i) {
