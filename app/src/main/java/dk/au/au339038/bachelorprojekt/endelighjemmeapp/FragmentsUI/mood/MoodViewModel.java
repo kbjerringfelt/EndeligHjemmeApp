@@ -4,22 +4,19 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Repository;
 
 public class MoodViewModel extends ViewModel {
     private Repository repository;
     private MutableLiveData<Mood> mood;
+    private LiveData<User> user;
 
     public MoodViewModel(){
         repository = Repository.getInstance();
         mood = repository.getMood();
+        user = repository.getUser();
     }
 
     public LiveData<Mood> getMood() {
@@ -37,7 +34,20 @@ public class MoodViewModel extends ViewModel {
 
     public void saveMood(String date, Mood m){
         int newmood = m.getMood();
-        repository.saveMood(date, newmood);
+        repository.saveMood(user.getValue().getId(), date, newmood);
+
+    }
+
+    public LiveData<User> getUser() {
+        if(user == null){
+            user= new MutableLiveData<User>();
+        }
+        return user;
+    }
+
+    public void updateMood(String date, Mood m){
+        int newmood = m.getMood();
+        repository.updateMood(user.getValue().getId(), date, newmood);
     }
 
 

@@ -4,16 +4,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Repository;
+
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private Repository repository;
+    private LiveData<User> user;
 
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Name");
+    public HomeViewModel(){
+        repository = Repository.getInstance();
+        user = repository.getUser();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<User> getUser() {
+        if(user == null){
+            user= new MutableLiveData<User>();
+        }
+        return user;
     }
 }

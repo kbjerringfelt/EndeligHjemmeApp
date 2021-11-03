@@ -20,7 +20,7 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {
 
-    Button psych, group, settings, adviceBtn, checklistBtn, thisWeekBtn;
+    Button psych, group, settings, adviceBtn, checklistBtn, thisWeekBtn, logOutBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        logOutBtn = findViewById(R.id.signOutBtn);
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLogIn();
+            }
+        });
+
     }
 
     private void goToSettings() {
@@ -96,7 +104,9 @@ public class MenuActivity extends AppCompatActivity {
 
     private void goToLogIn(){
         Intent intent = new Intent();
-        intent.putExtra("IntResult", 1);
+        int j = 1;
+        intent.putExtra("int", j);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

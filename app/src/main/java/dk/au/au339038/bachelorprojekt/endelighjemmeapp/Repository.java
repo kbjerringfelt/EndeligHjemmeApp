@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Support;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Database.AppsDatabase;
@@ -44,7 +44,8 @@ public class Repository {
     private MutableLiveData<ArrayList<Group>> groups;
     private MutableLiveData<Support> support;
     private MutableLiveData<Mood> mood;
-    private LiveData<Pin> pin;
+    private LiveData<User> _user;
+    private String dateOnly;
 
     public static Repository getInstance(){
         if(instance==null){
@@ -58,16 +59,19 @@ public class Repository {
         db = AppsDatabase.getDatabase(FHApplication.getAppContext());
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
-        pin = db.pinDAO().getPin();
+        _user = db.userDAO().getUser();
         loadPsychData();
         loadGroupData();
         loadSupportData();
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
-        String dateOnly = dateFormat.format(currentDate);
-        loadMood(dateOnly);
+        dateOnly = dateFormat.format(currentDate);
 
+
+    }
+    public void loadUserData(User user){
+        loadMood(user.getId(), dateOnly);
     }
 
 
@@ -88,19 +92,19 @@ public class Repository {
 
 
 
-    public LiveData<Pin> getPin(){
-        if(pin == null){
-            pin = new MutableLiveData<Pin>();
+    public LiveData<User> getUser(){
+        if(_user == null){
+            _user = new MutableLiveData<User>();
         }
-        return pin;
+        return _user;
     }
 
-    public void setPinAsynch(Pin p){
+    public void setUserAsynch(User u){
 
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                db.pinDAO().insertPin(p);
+                db.userDAO().insertUser(u);
             }
         });
     }
@@ -178,30 +182,8 @@ public class Repository {
         });
     }
 
-    private void loadMood(String date) {
-       /* DocumentReference docRef = fdb.collection("mood").document(date);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Mood m = document.toObject(Mood.class);
-                        if(m!=null){
-                            if(mood==null){
-                                mood = new MutableLiveData<Mood>();
-                            }
-                            mood.setValue(m);
-                        }
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });*/
-        final DocumentReference docRef = fdb.collection("mood").document(date);
+    private void loadMood(String userid, String date) {
+        final DocumentReference docRef = fdb.collection("mood"+userid).document(date);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,
@@ -230,11 +212,28 @@ public class Repository {
             }
         });
     }
+    public void updateMood(String userid, String date, int moodToUpdate){
+        DocumentReference docRef = fdb.collection("mood"+userid).document(date);
+        docRef
+                .update("mood", moodToUpdate)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
 
-    public void saveMood(String date, int currentMood){
+    }
+    public void saveMood(String userid, String date, int currentMood){
         Map<String, Object> mood = new HashMap<>();
         mood.put("mood", currentMood);
-        fdb.collection("mood").document(date)
+        fdb.collection("mood"+userid).document(date)
                 .set(mood)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

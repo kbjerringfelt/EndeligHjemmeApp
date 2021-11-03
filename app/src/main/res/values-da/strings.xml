@@ -58,6 +58,9 @@
     <string name="saveMood">Gem humør</string>
     <string name="cancel">Annuller</string>
     <string name="saveAnyway">Gem alligevel</string>
+    <string name="signUpGroup">Tilmeld</string>
     <string name="moodSaved">Humøret er gemt.</string>
+    <string name="moodHowTo">Her kan du indtaste dagens humør. Dette kan hjælpe med at give et overblik over humøret for en periode.</string>
+
 
 </resources>

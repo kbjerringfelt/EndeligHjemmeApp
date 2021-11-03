@@ -71,13 +71,14 @@ public class HomeActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
+                        Bundle b = data.getExtras();
+                        int j = b.getInt("int");
+                        if (j == 1){
+                            finish();
+                        }
 
                     }
-                    if(result.getResultCode() == RESULT_FIRST_USER) {
-                        Intent intent = new Intent();
-                        setResult(RESULT_FIRST_USER, intent);
-                        finish();
-                    }
+
                 }
             });
 

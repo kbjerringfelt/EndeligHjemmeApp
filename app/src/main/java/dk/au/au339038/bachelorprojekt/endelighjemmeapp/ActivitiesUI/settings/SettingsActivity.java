@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
@@ -59,6 +61,22 @@ public class SettingsActivity extends AppCompatActivity {
         intent.putExtra("IntResult", 1);
         finish();*/
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_top,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.bar_menu) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void goToSupportActivity() {
         Intent intent = new Intent(this, SupportActivity.class);
@@ -74,6 +92,11 @@ public class SettingsActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
                         Intent data = result.getData();
+                        Bundle b = data.getExtras();
+                        int j = b.getInt("int");
+                        if (j == 1){
+                            finish();
+                        }
 
                     }
                 }

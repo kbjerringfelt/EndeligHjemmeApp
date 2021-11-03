@@ -57,6 +57,9 @@
     <string name="saveMood">Save mood</string>
     <string name="cancel">Cancel</string>
     <string name="saveAnyway">Save anyway</string>
+    <string name="signUpGroup">Sign up</string>
     <string name="moodSaved">Mood succesfully saved</string>
+    <string name="moodHowTo">Here you can enter your mood for today. This can help giving an overview of the mood over a period.</string>
+
 
 </resources>

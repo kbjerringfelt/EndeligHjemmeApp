@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Database;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,18 +17,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.HomeActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class LogInActivity extends AppCompatActivity {
 
     private LogInViewModel lvm;
-    private LiveData<Pin> pin;
+    private LiveData<User> user;
+    private User theuser;
     private int _pin;
     private Button logInButton;
-    private EditText pinText;
+    private EditText userText;
 
 
 
@@ -37,23 +41,23 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
 
         logInButton = findViewById(R.id.logInBtn);
-        pinText = findViewById(R.id.pinText);
+        userText = findViewById(R.id.pinText);
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
-        pin = lvm.getPin();
-        pin.observe(this, new Observer<Pin>() {
+        loadTestUser(theuser);
+        user = lvm.getUser();
+        user.observe(this, new Observer<User>() {
             @Override
-            public void onChanged(Pin thepin) {
-                loadTestPin(thepin);
-                _pin = thepin.getPincode();
+            public void onChanged(User theuser) {
+                _pin = theuser.getPincode();
             }
         });
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = pinText.getText().toString();
+                String s = userText.getText().toString();
                 if(s.equals("")){
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
                 }
@@ -76,6 +80,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void goToMain() {
+        lvm.loadUserData(theuser);
         Intent i = new Intent(this, HomeActivity.class);
         // Bundle b = new Bundle();
         // b.putSerializable("Title", title);
@@ -89,12 +94,10 @@ public class LogInActivity extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == RESULT_OK) {
-                        //                      Intent data = result.getData();
-                        //                    movielist = lvm.getMovies();
-                        //                  movieAdapter.updateMovieList(movielist.getValue());
+
                     }
                     if (result.getResultCode() == RESULT_CANCELED) {
-                        pinText.setText("");
+                        userText.setText("");
                     }
                 }
             });
@@ -108,10 +111,12 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    private void loadTestPin(Pin p){
-        if(p==null){
-        Pin newp = new Pin(123456);
-        lvm.setPin(newp);
+    private void loadTestUser(User u){
+        if(u==null){
+            String bdate = "2021-10-21";
+            String duedate = "2022-01-08";
+        theuser = new User(123456,"Christina", "ukendt", "0101907652", bdate, duedate);
+        lvm.setUser(theuser);
         }
     }
 

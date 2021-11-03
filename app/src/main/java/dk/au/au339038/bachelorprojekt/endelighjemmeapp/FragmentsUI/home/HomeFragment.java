@@ -9,33 +9,51 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.login.LogInViewModel;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private HomeViewModel hvm;
+    private LiveData<User> user;
     private FragmentHomeBinding binding;
+    private TextView textView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        textView = binding.textHome;
+
+
+        return root;
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        hvm = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        user = hvm.getUser();
+        user.observe(this.getViewLifecycleOwner(), new Observer<User>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(getText(R.string.welcome)+ " " + s);
+            public void onChanged(User theuser) {
+                setUpUI(theuser);
             }
         });
-        return root;
+
+    }
+
+    private void setUpUI(User theuser) {
+        textView.setText(getText(R.string.welcome) +" "+ theuser.getName());
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,6 +24,7 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychViewModel;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.GroupAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
@@ -97,8 +99,15 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                         getText(R.string.contactTxt) +" " + g.getContact() + "\n\n" +
                         getText(R.string.phonetxt) +" " +g.getPhone() + "\n\n" +
                         getText(R.string.place_txt) +" " + g.getPlace() + "\n\n" +
-                        getText(R.string.descriptionTxt) +"\n" + g.getDescription());
+                        getText(R.string.descriptionTxt) +"\n" + g.getDescription())
+                .setPositiveButton(R.string.signUpGroup, (dialogInterface, i) -> signUpForGroup())
+        .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
+    }
+
+    private void signUpForGroup() {
+        Toast.makeText(FHApplication.getAppContext(), getText(R.string.signUpGroup)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
+
     }
 
 }

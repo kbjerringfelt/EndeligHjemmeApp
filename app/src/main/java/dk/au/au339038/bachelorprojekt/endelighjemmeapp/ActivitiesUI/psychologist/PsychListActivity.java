@@ -99,7 +99,8 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
                 getText(R.string.languagetxt) +" " + psychologist.getLanguage() + "\n\n" +
                 getText(R.string.disabilitytxt) +" " + psychologist.getDisability() + "\n\n" +
                 getText(R.string.specialtyTxt) +"\n" + psychologist.getSpecialty() + "\n\n" +
-                getText(R.string.moreinfo) +"\n" + psychologist.getMoreinfo());
+                getText(R.string.moreinfo) +"\n" + psychologist.getMoreinfo())
+        .setNegativeButton(R.string.backBtn, (dialogInterface, i) -> {});
         builder.create().show();
     }
 

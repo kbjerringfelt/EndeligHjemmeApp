@@ -10,25 +10,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.MoodFragmentBinding;
@@ -63,12 +58,14 @@ public class MoodFragment extends Fragment {
         saveBtn = binding.moodSaveBtn;
         moodSkb = binding.seekBarMood;
         final TextView moodDate = binding.moodDate;
+        final TextView moodGuide = binding.textViewGuide;
 
         //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
         moodDate.setText(dateOnly);
+        moodGuide.setText(R.string.moodHowTo);
 
 
         return root;
@@ -122,10 +119,10 @@ public class MoodFragment extends Fragment {
                 int nm = moodSkb.getProgress() + 1;
                 Mood newMood = new Mood(nm);
                 if(mt !=11) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(FHApplication.getAppContext())
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                             .setMessage(R.string.saveDialog)
                             .setTitle(R.string.saveMood)
-                            .setPositiveButton(R.string.saveAnyway, (dialogInterface, i) -> saveMood(newMood))
+                            .setPositiveButton(R.string.saveAnyway, (dialogInterface, i) -> updateMood(newMood))
                             .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
                     builder.create().show();
                 }
@@ -140,6 +137,12 @@ public class MoodFragment extends Fragment {
 
     private void saveMood(Mood m) {
         mvm.saveMood(dateOnly, m);
+        im = moodSkb.getProgress();
+        Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateMood(Mood m) {
+        mvm.updateMood(dateOnly, m);
         im = moodSkb.getProgress();
         Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
     }
