@@ -45,8 +45,7 @@
     <string name="childBtn">Change info about child</string>
     <string name="linkTxt">FAQ about the app:</string>
     <string name="supportContextTxt">Further questions?</string>
-    <string
-        name="faqLink"><a href="https://www.google.com/">FAQ</a></string>
+    <string name="faqLink"><a href="https://www.google.com/">FAQ</a></string>
     <string name="enterPin">Enter PIN</string>
     <string name="enterPinTxt">Enter PIN</string>
     <string name="saveBtn">Save</string>

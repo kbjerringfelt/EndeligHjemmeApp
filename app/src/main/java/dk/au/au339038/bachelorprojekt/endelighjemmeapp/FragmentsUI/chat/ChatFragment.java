@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ public class ChatFragment extends Fragment {
 
     private ChatViewModel chatViewModel;
     private FragmentChatBinding binding;
+    private ImageView image;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -27,6 +29,9 @@ public class ChatFragment extends Fragment {
 
         binding = FragmentChatBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        image = binding.mockupchat;
+        image.setImageResource(R.mipmap.chat);
 
         final TextView textView = binding.textDashboard;
         chatViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

@@ -1,5 +1,9 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -21,6 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CheckListActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CreateGroupActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.MenuActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychViewModel;
@@ -71,11 +77,32 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(), getText(R.string.createBtn)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-            }
+                goToCreateGroup();
+                 }
         });
     }
 
+    private void goToCreateGroup() {
+        Intent intent = new Intent(this, CreateGroupActivity.class);
+        launcher.launch(intent);
+    }
+
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        Bundle b = data.getExtras();
+                        int j = b.getInt("int");
+                        if (j == 1){
+                            finish();
+                        }
+
+                    }
+                }
+            });
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

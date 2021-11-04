@@ -38,15 +38,6 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/list_btn_psych"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left|center_vertical"
-                android:text="@string/list_btn_psych"
-                android:textColor="@color/black"
-                app:backgroundTint="@color/ic_menu_background" />
-
-            <Button
                 android:id="@+id/list_btn_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,11 +47,11 @@
                 app:backgroundTint="@color/ic_menu_background" />
 
             <Button
-                android:id="@+id/list_btn_checklist"
+                android:id="@+id/list_btn_babyweek"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
-                android:text="@string/btn_checklist"
+                android:text="@string/btn_babyweek"
                 android:textColor="@color/black"
                 app:backgroundTint="@color/ic_menu_background" />
 
@@ -74,11 +65,20 @@
                 app:backgroundTint="@color/ic_menu_background" />
 
             <Button
-                android:id="@+id/list_btn_babyweek"
+                android:id="@+id/list_btn_checklist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
-                android:text="@string/btn_babyweek"
+                android:text="@string/btn_checklist"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/ic_menu_background" />
+
+            <Button
+                android:id="@+id/list_btn_psych"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:text="@string/list_btn_psych"
                 android:textColor="@color/black"
                 app:backgroundTint="@color/ic_menu_background" />
 

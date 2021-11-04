@@ -1,9 +1,11 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.calendar;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,9 @@ public class CalendarFragment extends Fragment {
 
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        ImageView image = binding.mockupcalender;
+        image.setImageResource(R.mipmap.kalender);
 
         final TextView textView = binding.textNotifications;
         calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {

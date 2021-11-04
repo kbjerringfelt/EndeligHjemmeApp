@@ -60,6 +60,7 @@ public class MoodFragment extends Fragment {
         final TextView moodDate = binding.moodDate;
         final TextView moodGuide = binding.textViewGuide;
 
+
         //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");

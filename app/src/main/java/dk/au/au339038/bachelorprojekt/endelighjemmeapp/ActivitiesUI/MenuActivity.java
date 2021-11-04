@@ -54,8 +54,7 @@ public class MenuActivity extends AppCompatActivity {
         adviceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(), getText(R.string.btn_advice)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-
+                goToAdviceActivity();
             }
         });
 
@@ -63,8 +62,7 @@ public class MenuActivity extends AppCompatActivity {
         checklistBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(),getText(R.string.btn_checklist)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-
+                goToChecklist();
             }
         });
 
@@ -72,8 +70,7 @@ public class MenuActivity extends AppCompatActivity {
         thisWeekBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(), getText(R.string.btn_babyweek)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-
+                goToThisWeek();
             }
         });
 
@@ -85,6 +82,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void goToThisWeek() {
+        Intent intent = new Intent(this, ThisWeekActivity.class);
+        launcher.launch(intent);
+    }
+
+    private void goToChecklist() {
+        Intent intent = new Intent(this, CheckListActivity.class);
+        launcher.launch(intent);
     }
 
     private void goToSettings() {
@@ -99,6 +106,11 @@ public class MenuActivity extends AppCompatActivity {
 
     private void goToPsychActivity() {
         Intent intent = new Intent(this, PsychListActivity.class);
+        launcher.launch(intent);
+    }
+
+    private void goToAdviceActivity() {
+        Intent intent = new Intent(this, AdviceActivity.class);
         launcher.launch(intent);
     }
 

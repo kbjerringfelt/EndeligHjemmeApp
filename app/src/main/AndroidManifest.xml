@@ -15,6 +15,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".ActivitiesUI.EditChildActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesUI.CheckListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesUI.EditAreaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesUI.CreateGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesUI.ThisWeekActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitiesUI.AdviceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivitiesUI.support.SupportActivity"
             android:exported="false" />
         <activity

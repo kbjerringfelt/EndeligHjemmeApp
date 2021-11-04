@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CheckListActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.EditAreaActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.EditChildActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.login.LogInActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.support.SupportActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
@@ -42,8 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(), getText(R.string.areaBtn)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-
+               goToEditArea();
             }
         });
 
@@ -51,9 +53,19 @@ public class SettingsActivity extends AppCompatActivity {
         childEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FHApplication.getAppContext(), getText(R.string.childBtn)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-            }
+               goToChildEdit();
+                  }
         });
+    }
+
+    private void goToEditArea() {
+        Intent intent = new Intent(this, EditAreaActivity.class);
+        launcher.launch(intent);
+    }
+
+    private void goToChildEdit() {
+        Intent intent = new Intent(this, EditChildActivity.class);
+        launcher.launch(intent);
     }
 
     private void goToLogIn(){
@@ -84,7 +96,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    //Også lavet ud fra samme metode i Test12 demo
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

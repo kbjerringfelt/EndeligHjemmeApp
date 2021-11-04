@@ -115,7 +115,7 @@ public class LogInActivity extends AppCompatActivity {
         if(u==null){
             String bdate = "2021-10-21";
             String duedate = "2022-01-08";
-        theuser = new User(123456,"Christina", "ukendt", "0101907652", bdate, duedate);
+        theuser = new User(123456,"Christina", "Julie", "0101907652", bdate, duedate);
         lvm.setUser(theuser);
         }
     }
