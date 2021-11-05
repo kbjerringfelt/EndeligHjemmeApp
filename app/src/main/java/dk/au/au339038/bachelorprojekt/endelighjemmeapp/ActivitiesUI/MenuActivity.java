@@ -10,12 +10,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.AdviceActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CheckListActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.ThisWeekActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.settings.SettingsActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class MenuActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,16 +11,16 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class EditChildActivity extends AppCompatActivity {
+public class CreateGroupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_child);
+        setContentView(R.layout.activity_create_group);
 
-        ImageView image = findViewById(R.id.mockupeditchild);
-        image.setImageResource(R.mipmap.opretredigerbarn);
-        TextView text = findViewById(R.id.text_editchild);
+        ImageView image = findViewById(R.id.mockupcreategroup);
+        image.setImageResource(R.mipmap.opretgruppe);
+        TextView text = findViewById(R.id.text_creategroup);
         text.setText(R.string.not_implemented);
 
 

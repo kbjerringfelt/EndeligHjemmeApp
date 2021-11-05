@@ -60,6 +60,7 @@
     <string name="moodSaved">Mood succesfully saved</string>
     <string name="moodHowTo">Here you can enter your mood for today. This can help giving an overview of the mood over a period.</string>
     <string name="createBtn">Create group</string>
+    <string name="passwordBtn">Forgot/change PIN</string>
 
 
 </resources>

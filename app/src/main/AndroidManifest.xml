@@ -15,22 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
-            android:name=".ActivitiesUI.EditChildActivity"
+            android:name=".ActivitiesUI.NotDone.EditChildActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.CheckListActivity"
+            android:name=".ActivitiesUI.NotDone.CheckListActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.EditAreaActivity"
+            android:name=".ActivitiesUI.NotDone.EditAreaActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.CreateGroupActivity"
+            android:name=".ActivitiesUI.psychologist.CreateGroupActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.ThisWeekActivity"
+            android:name=".ActivitiesUI.NotDone.ThisWeekActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.AdviceActivity"
+            android:name=".ActivitiesUI.NotDone.AdviceActivity"
             android:exported="false" />
         <activity
             android:name=".ActivitiesUI.support.SupportActivity"

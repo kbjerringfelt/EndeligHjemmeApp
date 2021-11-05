@@ -30,7 +30,7 @@ public class LogInActivity extends AppCompatActivity {
     private LiveData<User> user;
     private User theuser;
     private int _pin;
-    private Button logInButton;
+    private Button logInButton, changePin;
     private EditText userText;
 
 
@@ -51,6 +51,14 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onChanged(User theuser) {
                 _pin = theuser.getPincode();
+            }
+        });
+
+        changePin = findViewById(R.id.newPasswordBtn);
+        changePin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.passwordBtn) +" "+ getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
 

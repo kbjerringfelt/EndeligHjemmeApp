@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,17 +10,18 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class ThisWeekActivity extends AppCompatActivity {
+public class AdviceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_this_week);
+        setContentView(R.layout.activity_advice);
 
-        ImageView image = findViewById(R.id.mockupweek);
-        image.setImageResource(R.mipmap.nuvaerendeuge);
-        TextView text = findViewById(R.id.text_week);
+        ImageView image = findViewById(R.id.mockupadvice);
+        image.setImageResource(R.mipmap.gode);
+        TextView text = findViewById(R.id.text_advice);
         text.setText(R.string.not_implemented);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

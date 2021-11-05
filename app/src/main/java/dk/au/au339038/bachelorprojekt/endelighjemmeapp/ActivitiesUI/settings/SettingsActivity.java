@@ -13,14 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
-import android.widget.Toast;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CheckListActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.EditAreaActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.EditChildActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.login.LogInActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.EditAreaActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.EditChildActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.support.SupportActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class SettingsActivity extends AppCompatActivity {

@@ -1,7 +1,8 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,16 +11,16 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class AdviceActivity extends AppCompatActivity {
+public class EditAreaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_advice);
+        setContentView(R.layout.activity_edit_area);
 
-        ImageView image = findViewById(R.id.mockupadvice);
-        image.setImageResource(R.mipmap.gode);
-        TextView text = findViewById(R.id.text_advice);
+        ImageView image = findViewById(R.id.mockupeditaera);
+        image.setImageResource(R.mipmap.redigerkommune);
+        TextView text = findViewById(R.id.text_editarea);
         text.setText(R.string.not_implemented);
 
     }
@@ -34,6 +35,10 @@ public class AdviceActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.bar_menu) {
+            Intent intent = new Intent();
+            int j = 1;
+            intent.putExtra("int", j);
+            setResult(RESULT_OK, intent);
             finish();
         }
 

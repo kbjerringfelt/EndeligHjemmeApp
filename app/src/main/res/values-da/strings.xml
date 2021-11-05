@@ -62,6 +62,7 @@
     <string name="moodSaved">Humøret er gemt.</string>
     <string name="moodHowTo">Her kan du indtaste dagens humør. Dette kan hjælpe med at give et overblik over humøret for en periode.</string>
     <string name="createBtn">Opret gruppe</string>
+    <string name="passwordBtn">Forgot/change PIN</string>
 
 
 </resources>

@@ -25,16 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CheckListActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.CreateGroupActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.MenuActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychListActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.PsychViewModel;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.CreateGroupActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.GroupAdapter;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class GroupListActivity extends AppCompatActivity implements GroupAdapter.IGroupItemClickedListener {

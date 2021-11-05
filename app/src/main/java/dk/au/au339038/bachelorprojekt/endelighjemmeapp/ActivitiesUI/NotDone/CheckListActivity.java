@@ -1,8 +1,7 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,18 +10,17 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class CreateGroupActivity extends AppCompatActivity {
+public class CheckListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_group);
+        setContentView(R.layout.activity_check_list);
 
-        ImageView image = findViewById(R.id.mockupcreategroup);
-        image.setImageResource(R.mipmap.opretgruppe);
-        TextView text = findViewById(R.id.text_creategroup);
+        ImageView image = findViewById(R.id.mockupchecklist);
+        image.setImageResource(R.mipmap.tjekliste);
+        TextView text = findViewById(R.id.text_checklist);
         text.setText(R.string.not_implemented);
-
 
     }
     @Override
@@ -36,10 +34,6 @@ public class CreateGroupActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.bar_menu) {
-            Intent intent = new Intent();
-            int j = 1;
-            intent.putExtra("int", j);
-            setResult(RESULT_OK, intent);
             finish();
         }
 

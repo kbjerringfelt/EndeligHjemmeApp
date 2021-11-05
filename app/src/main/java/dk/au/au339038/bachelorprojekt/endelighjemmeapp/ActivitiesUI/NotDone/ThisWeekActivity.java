@@ -1,8 +1,7 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,18 +10,17 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class EditAreaActivity extends AppCompatActivity {
+public class ThisWeekActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_area);
+        setContentView(R.layout.activity_this_week);
 
-        ImageView image = findViewById(R.id.mockupeditaera);
-        image.setImageResource(R.mipmap.redigerkommune);
-        TextView text = findViewById(R.id.text_editarea);
+        ImageView image = findViewById(R.id.mockupweek);
+        image.setImageResource(R.mipmap.nuvaerendeuge);
+        TextView text = findViewById(R.id.text_week);
         text.setText(R.string.not_implemented);
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,10 +33,6 @@ public class EditAreaActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.bar_menu) {
-            Intent intent = new Intent();
-            int j = 1;
-            intent.putExtra("int", j);
-            setResult(RESULT_OK, intent);
             finish();
         }
 
