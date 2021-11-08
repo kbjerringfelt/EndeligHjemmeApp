@@ -32,7 +32,7 @@
     <string name="list_btn_psych">Liste med psykologer</string>
     <string name="list_btn_group">Liste med supportgrupper</string>
     <string name="btn_checklist">Tjekliste</string>
-    <string name="btn_advice">Nogen gode råd</string>
+    <string name="btn_advice">Gode råd</string>
     <string name="btn_babyweek">Baby i denne uge</string>
     <string name="btn_settings">Indstillinger</string>
     <string name="not_implemented">ikke implementeret endnu.</string>
