@@ -6,12 +6,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 
-@Database(entities = {User.class}, version = 2)
+@Database(entities = {Pin.class}, version = 4)
 public abstract class AppsDatabase extends RoomDatabase {
 
-    public abstract UserDAO userDAO();  //mandatory DAO getter
+    public abstract PinDAO pinDAO();  //mandatory DAO getter
     private static AppsDatabase instance; //database instance for singleton
 
     public static AppsDatabase getDatabase(final Context context) {

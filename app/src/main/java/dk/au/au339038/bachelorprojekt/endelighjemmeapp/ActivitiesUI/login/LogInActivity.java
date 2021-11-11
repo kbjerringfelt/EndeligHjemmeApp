@@ -6,6 +6,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.room.Database;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.HomeActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
@@ -27,11 +29,12 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 public class LogInActivity extends AppCompatActivity {
 
     private LogInViewModel lvm;
-    private LiveData<User> user;
-    private User theuser;
+    private LiveData<Pin> pin;
+    private Pin thepin;
     private int _pin;
     private Button logInButton, changePin;
     private EditText userText;
+    private String userId;
 
 
 
@@ -45,12 +48,16 @@ public class LogInActivity extends AppCompatActivity {
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
-        loadTestUser(theuser);
-        user = lvm.getUser();
-        user.observe(this, new Observer<User>() {
+        loadTestUser(thepin);
+        if(pin == null){
+            pin = new MutableLiveData<Pin>();
+        }
+        pin = lvm.getPin();
+        pin.observe(this, new Observer<Pin>() {
             @Override
-            public void onChanged(User theuser) {
-                _pin = theuser.getPincode();
+            public void onChanged(Pin newpin) {
+                _pin = newpin.getPin();
+                thepin = newpin;
             }
         });
 
@@ -88,11 +95,12 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void goToMain() {
-        lvm.loadUserData(theuser);
+        lvm.loadUserData(thepin.getUid());
+        String userId = thepin.getUid();
         Intent i = new Intent(this, HomeActivity.class);
-        // Bundle b = new Bundle();
-        // b.putSerializable("Title", title);
-        // i.putExtras(b);
+        Bundle b = new Bundle();
+        b.putSerializable("userID", userId);
+        i.putExtras(b);
         launcher.launch(i);
     }
     //Also from Test12 demo
@@ -119,12 +127,10 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
-    private void loadTestUser(User u){
-        if(u==null){
-            String bdate = "2021-10-21";
-            String duedate = "2022-01-08";
-        theuser = new User(123456,"Christina", "Julie", "0101907652", bdate, duedate);
-        lvm.setUser(theuser);
+   private void loadTestUser(Pin p){
+        if(p==null){
+        thepin = new Pin(123456,"0101907652");
+        lvm.setPin(thepin);
         }
     }
 

@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".ActivitiesUI.NotDone.MoodGraphActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivitiesUI.NotDone.EditChildActivity"
             android:exported="false" />
         <activity

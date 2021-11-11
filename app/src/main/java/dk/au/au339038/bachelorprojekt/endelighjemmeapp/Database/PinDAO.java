@@ -7,17 +7,15 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 
 @Dao
-public interface UserDAO {
+public interface PinDAO {
 
-    @Query("SELECT * FROM User")
-    LiveData<User> getUser();
-
-    //@Update
-    //void updateUser(User user);
+    @Query("SELECT * FROM Pin")
+    LiveData<Pin> getPin();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUser(User user);
+    void insertPin(Pin pin);
 }

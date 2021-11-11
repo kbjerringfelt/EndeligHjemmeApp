@@ -1,5 +1,5 @@
 <resources>
-    <string  name="app_name"><color name="black">Finally home</color>
+    <string name="app_name"><color name="black">Finally home</color>
  </string>
     <string name="SwitchFaceId">Face ID</string>
     <string name="SwitchTouchId">Touch ID</string>
@@ -62,6 +62,9 @@
     <string name="moodHowTo">Here you can enter your mood for today. This can help giving an overview of the mood over a period.</string>
     <string name="createBtn">Create group</string>
     <string name="passwordBtn">Forgot/change PIN</string>
+    <string name="surelogOut">Sign out</string>
+   <string name="logoutDialog">Sure you want to sign out?</string>
+   <string name="moodOverviewBtn">Overview</string>
 
 
 </resources>

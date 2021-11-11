@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -79,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToLogIn();
+                logOut();
             }
         });
 
@@ -115,7 +116,17 @@ public class MenuActivity extends AppCompatActivity {
         launcher.launch(intent);
     }
 
+    private void logOut(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setMessage(R.string.logoutDialog)
+                .setTitle(R.string.signOutBtn)
+                .setPositiveButton(R.string.surelogOut, (dialogInterface, i) -> goToLogIn())
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
+        builder.create().show();
+    }
+
     private void goToLogIn(){
+
         Intent intent = new Intent();
         int j = 1;
         intent.putExtra("int", j);

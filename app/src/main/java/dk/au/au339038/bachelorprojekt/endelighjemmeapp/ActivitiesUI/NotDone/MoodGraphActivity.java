@@ -10,33 +10,18 @@ import android.widget.TextView;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class CheckListActivity extends AppCompatActivity {
+public class MoodGraphActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_list);
+        setContentView(R.layout.activity_mood_graph);
 
         ImageView image = findViewById(R.id.mockupmoodgraph);
-        image.setImageResource(R.mipmap.tjekliste);
+        image.setImageResource(R.mipmap.moodoverview);
         TextView text = findViewById(R.id.text_moodgraph);
         text.setText(R.string.not_implemented);
 
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main_top,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.bar_menu) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

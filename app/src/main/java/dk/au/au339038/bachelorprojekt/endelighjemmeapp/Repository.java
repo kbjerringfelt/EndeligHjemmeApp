@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Support;
@@ -44,7 +45,8 @@ public class Repository {
     private MutableLiveData<ArrayList<Group>> groups;
     private MutableLiveData<Support> support;
     private MutableLiveData<Mood> mood;
-    private LiveData<User> _user;
+    private MutableLiveData<User> user;
+    private LiveData<Pin> _pin;
     private String dateOnly;
 
     public static Repository getInstance(){
@@ -59,7 +61,7 @@ public class Repository {
         db = AppsDatabase.getDatabase(FHApplication.getAppContext());
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
-        _user = db.userDAO().getUser();
+        _pin = db.pinDAO().getPin();
         loadPsychData();
         loadGroupData();
         loadSupportData();
@@ -70,10 +72,9 @@ public class Repository {
 
 
     }
-    public void loadUserData(User user){
-        loadMood(user.getId(), dateOnly);
-    }
-
+    //public void loadUserData(User user){
+    //    loadMood(user.getId(), dateOnly);
+    //}
 
     public LiveData<ArrayList<Psychologist>> getPsychologists(){
         return psychs;
@@ -91,20 +92,31 @@ public class Repository {
 
 
 
-
-    public LiveData<User> getUser(){
-        if(_user == null){
-            _user = new MutableLiveData<User>();
-        }
-        return _user;
+    public LiveData<User> loadTheUser(String userId){
+        loadUser(userId);
+        loadMood(userId, dateOnly);
+        return user;
     }
 
-    public void setUserAsynch(User u){
+    public LiveData<User> getUser(){
+        if(user == null){
+            user = new MutableLiveData<User>();
+        }
+        return user;}
+
+    public LiveData<Pin> getPin(){
+        if(_pin == null){
+            _pin = new MutableLiveData<Pin>();
+        }
+        return _pin;
+    }
+
+    public void setPinAsynch(Pin p){
 
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                db.userDAO().insertUser(u);
+                db.pinDAO().insertPin(p);
             }
         });
     }
@@ -247,6 +259,36 @@ public class Repository {
                         Log.w(TAG, "Error writing document", e);
                     }
                 });
+    }
+    private void loadUser(String userid) {
+        final DocumentReference docRef = fdb.collection("users").document(userid);
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
+                        ? "Local" : "Server";
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, source + " data: " + snapshot.getData());
+                    User u = snapshot.toObject(User.class);
+                    if(u!=null) {
+                        if (user == null) {
+                            user = new MutableLiveData<User>();
+                        }
+                        user.setValue(u);
+                    }
+
+                } else {
+                    Log.d(TAG, source + " data: null");
+                }
+            }
+        });
     }
 
 

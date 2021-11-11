@@ -5,41 +5,28 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity
+
 public class User {
     //Christina, barn 8 uger, hedder julie, født 28+4.
 
-    @PrimaryKey(autoGenerate = true)
-    private int uid;
-    private int pincode = 1000000;
     private String name;
-    private String childName;
-    private String birthDate;
-    private String dueDate;
+    private String babyname;
+    private String babybdate;
+    private String duedate;
+    private String bweek;
     private String id;
+    private String area;
 
-    public User(int pincode, String name, String childName, String id, String birthDate, String dueDate){
+    public User(){}
+
+    public User(String name, String babyname, String babybdate, String dueDate, String bweek, String id, String area){
         this.name = name;
-        this.childName = childName;
+        this.babyname = babyname;
+        this.babybdate = babybdate;
+        this.duedate = dueDate;
+        this.bweek = bweek;
+        this.area = area;
         this.id = id;
-        this.pincode = pincode;
-        this.dueDate = dueDate;
-    }
-
-    public int getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(int pincode) {
-        this.pincode = pincode;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
     }
 
     public String getName() {
@@ -50,28 +37,36 @@ public class User {
         this.name = name;
     }
 
-    public String getChildName() {
-        return childName;
+    public String getBabyname() {
+        return babyname;
     }
 
-    public void setChildName(String childName) {
-        this.childName = childName;
+    public void setBabyname(String babyname) {
+        this.babyname = babyname;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getBabybdate() {
+        return babybdate;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBabybdate(String babybdate) {
+        this.babybdate = babybdate;
     }
 
-    public String getDueDate() {
-        return dueDate;
+    public String getDuedate() {
+        return duedate;
     }
 
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+    public void setDuedate(String duedate) {
+        this.duedate = duedate;
+    }
+
+    public String getBweek() {
+        return bweek;
+    }
+
+    public void setBweek(String bweek) {
+        this.bweek = bweek;
     }
 
     public String getId() {
@@ -80,5 +75,13 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }
