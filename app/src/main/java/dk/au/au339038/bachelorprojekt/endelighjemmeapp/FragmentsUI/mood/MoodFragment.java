@@ -136,7 +136,7 @@ public class MoodFragment extends Fragment {
                 n = progress + 1;
                 setImage(n);
                 moodNumber.setText("" + n);
-               // mvm.getMood().getValue().setMood(n);
+                mvm.getMood().getValue().setMood(n);
             }
 
             @Override

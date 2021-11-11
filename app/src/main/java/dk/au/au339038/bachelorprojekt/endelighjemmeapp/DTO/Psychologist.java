@@ -1,7 +1,7 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
 public class Psychologist {
-    private String name, specialty, insurance, city, disability, education, language, moreinfo, sex;
+    private String name, specialty, insurance, city, disability, education, language, moreinfo, sex, area;
     private long zip, phone, price;
 
 
@@ -113,4 +113,11 @@ public class Psychologist {
         this.name = name;
     }
 
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 }

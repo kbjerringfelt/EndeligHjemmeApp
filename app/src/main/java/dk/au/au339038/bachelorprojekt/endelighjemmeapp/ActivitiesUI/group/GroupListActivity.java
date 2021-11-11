@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist.CreateGroupActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CreateGroupActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.GroupAdapter;

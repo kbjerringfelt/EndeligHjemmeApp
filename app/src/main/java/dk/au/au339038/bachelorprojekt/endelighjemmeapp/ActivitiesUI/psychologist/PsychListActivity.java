@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.MenuActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
@@ -33,7 +34,9 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
     private RecyclerView prcv;
     private PsychAdapter psychAdapter;
     private LiveData<ArrayList<Psychologist>> lpsychologists;
+    private LiveData<User> user;
     private ArrayList<Psychologist> psychologists;
+    private User _user;
     PsychViewModel pvm;
 
     @Override
@@ -50,12 +53,26 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
         psychologists = new ArrayList<Psychologist>();
 
+        user = pvm.getUser();
+        user.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                _user = user;
+            }
+        });
+
         lpsychologists = pvm.getPsychologists();
         lpsychologists.observe(this, new Observer<ArrayList<Psychologist>>() {
             @Override
             public void onChanged(ArrayList<Psychologist> psychs) {
-                psychAdapter.updateMHPList(psychs);
-                psychologists = psychs;
+                for (Psychologist p : psychs)
+                {
+                    if (p.getArea().equals( _user.getArea())){
+                        psychologists.add(p);
+                    }
+
+                }
+                psychAdapter.updateMHPList(psychologists);
             }
         });
         // psychAdapter.updateMHPList(psychologists);*/

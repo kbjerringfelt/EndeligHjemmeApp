@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.psychologist;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone;
 
 import androidx.appcompat.app.AppCompatActivity;
 

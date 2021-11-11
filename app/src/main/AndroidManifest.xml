@@ -27,7 +27,7 @@
             android:name=".ActivitiesUI.NotDone.EditAreaActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.psychologist.CreateGroupActivity"
+            android:name=".ActivitiesUI.NotDone.CreateGroupActivity"
             android:exported="false" />
         <activity
             android:name=".ActivitiesUI.NotDone.ThisWeekActivity"
