@@ -64,22 +64,15 @@ public class Repository {
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
         _pin = db.pinDAO().getPin();
-        //loadPsychData();
-        //loadGroupData();
         loadData("psychologists", "p");
         loadData("groups", "g");
         loadData("advice", "a");
-        loadSupportData();
+        loadDocument("support", "supportinfo", "s");
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
-
-
     }
-    //public void loadUserData(User user){
-    //    loadMood(user.getId(), dateOnly);
-    //}
 
     public LiveData<ArrayList<Psychologist>> getPsychologists(){
         return psychs;
@@ -100,8 +93,8 @@ public class Repository {
     }
 
     public LiveData<User> loadTheUser(String userId){
-        loadUser(userId);
-        loadMood(userId, dateOnly);
+        loadDocument("users", userId, "u");
+        loadDocument("mood"+userId, dateOnly, "m");
         return user;
     }
 
@@ -181,82 +174,9 @@ public class Repository {
                         }
                 });
     }
-   /* private void loadPsychData() {
-        fdb.collection("psychologists")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        ArrayList<Psychologist> updatedPsychologists = new ArrayList<>();
-                        if(value != null && !value.isEmpty()){
-                            for(DocumentSnapshot doc : value.getDocuments()){
-                                Psychologist p = doc.toObject(Psychologist.class);
-                                if(p!=null){
-                                    updatedPsychologists.add(p);
-                                    Log.d(TAG, "DocumentSnapshot data: " + doc.getData());
-                                }
-                            }
-                            if(psychs==null){
-                                psychs = new MutableLiveData<ArrayList<Psychologist>>();
-                            }
-                            psychs.setValue(updatedPsychologists);
-                        }
-                    }
-                });
 
-
-    }*/
-   /* private void loadGroupData() {
-                fdb.collection("groups")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
-                        ArrayList<Group> updatedGroups = new ArrayList<>();
-                        if(valueg != null && !valueg.isEmpty()){
-                            for(DocumentSnapshot docg : valueg.getDocuments()){
-                                Group g = docg.toObject(Group.class);
-                                if(g!=null){
-                                    updatedGroups.add(g);
-                                }
-                                Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
-                            }
-                            if(groups==null){
-                                groups = new MutableLiveData<ArrayList<Group>>();
-                            }
-                            groups.setValue(updatedGroups);
-                        }
-                    }
-                });
-    }*/
-
-
-    private void loadSupportData() {
-        DocumentReference docRef = fdb.collection("support").document("supportinfo");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Support s = document.toObject(Support.class);
-                        if(s!=null){
-                            if(support==null){
-                                support = new MutableLiveData<Support>();
-                            }
-                            support.setValue(s);
-                        }
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-    }
-
-    private void loadMood(String userid, String date) {
-        final DocumentReference docRef = fdb.collection("mood"+userid).document(date);
+    private void loadDocument(String collectionName, String documentName, String type) {
+        final DocumentReference docRef = fdb.collection(collectionName).document(documentName);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot snapshot,
@@ -271,12 +191,32 @@ public class Repository {
 
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, source + " data: " + snapshot.getData());
-                    Mood m = snapshot.toObject(Mood.class);
-                    if(m!=null) {
-                        if (mood == null) {
-                            mood = new MutableLiveData<Mood>();
+                    if(type.equals("u")) {
+                        User u = snapshot.toObject(User.class);
+                        if (u != null) {
+                            if (user == null) {
+                                user = new MutableLiveData<User>();
+                            }
+                            user.setValue(u);
                         }
-                        mood.setValue(m);
+                    }
+                    if(type.equals("m")) {
+                        Mood m = snapshot.toObject(Mood.class);
+                        if (m != null) {
+                            if (mood == null) {
+                                mood = new MutableLiveData<Mood>();
+                            }
+                            mood.setValue(m);
+                        }
+                    }
+                    if(type.equals("s")) {
+                        Support s = snapshot.toObject(Support.class);
+                        if (s != null) {
+                            if (support == null) {
+                                support = new MutableLiveData<Support>();
+                            }
+                            support.setValue(s);
+                        }
                     }
 
                 } else {
@@ -285,6 +225,7 @@ public class Repository {
             }
         });
     }
+
     public void updateMood(String userid, String date, int moodToUpdate){
         DocumentReference docRef = fdb.collection("mood"+userid).document(date);
         docRef
@@ -321,37 +262,4 @@ public class Repository {
                     }
                 });
     }
-    private void loadUser(String userid) {
-        final DocumentReference docRef = fdb.collection("users").document(userid);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                String source = snapshot != null && snapshot.getMetadata().hasPendingWrites()
-                        ? "Local" : "Server";
-
-                if (snapshot != null && snapshot.exists()) {
-                    Log.d(TAG, source + " data: " + snapshot.getData());
-                    User u = snapshot.toObject(User.class);
-                    if(u!=null) {
-                        if (user == null) {
-                            user = new MutableLiveData<User>();
-                        }
-                        user.setValue(u);
-                    }
-
-                } else {
-                    Log.d(TAG, source + " data: null");
-                }
-            }
-        });
-    }
-
-
-
 }
