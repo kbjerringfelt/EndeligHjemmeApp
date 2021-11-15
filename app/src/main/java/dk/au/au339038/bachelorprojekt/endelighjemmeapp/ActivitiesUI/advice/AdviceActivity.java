@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.advice;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -13,69 +13,64 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CreateGroupActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupViewModel;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.AdviceAdapter;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.GroupAdapter;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Advice;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.GroupAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class GroupListActivity extends AppCompatActivity implements GroupAdapter.IGroupItemClickedListener {
+public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.IAdviceItemClickedListener{
 
     public static final String TAG = "LogF";
-    private RecyclerView grcv;
-    private GroupAdapter groupAdapter;
-    private LiveData<ArrayList<Group>> lgroups;
-    private ArrayList<Group> groups;
-    GroupViewModel gvm;
-    private Button createBtn;
+    private RecyclerView arcv;
+    private AdviceAdapter adviceAdapter;
+    private LiveData<ArrayList<Advice>> ladvice;
+    private ArrayList<Advice> advice;
+    AdviceViewModel avm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_list);
+        setContentView(R.layout.activity_advice);
 
-        gvm = new ViewModelProvider(this).get(GroupViewModel.class);
+        avm = new ViewModelProvider(this).get(AdviceViewModel.class);
 
-        groupAdapter = new GroupAdapter(this);
-        grcv = findViewById(R.id.rcv_group);
-        grcv.setLayoutManager(new LinearLayoutManager(this));
-        grcv.setAdapter(groupAdapter);
+        adviceAdapter = new AdviceAdapter(this);
+        arcv = findViewById(R.id.rcv_advice);
+        arcv.setLayoutManager(new LinearLayoutManager(this));
+        arcv.setAdapter(adviceAdapter);
 
-        groups = new ArrayList<Group>();
+        advice = new ArrayList<Advice>();
 
-        lgroups = gvm.getGroups();
-        lgroups.observe(this, new Observer<ArrayList<Group>>() {
+        ladvice = avm.getAdvice();
+        ladvice.observe(this, new Observer<ArrayList<Advice>>() {
             @Override
-            public void onChanged(ArrayList<Group> ngroups) {
-                groupAdapter.updateMHPList(ngroups);
-                groups = ngroups;
+            public void onChanged(ArrayList<Advice> nadvice) {
+                adviceAdapter.updateAdviceList(nadvice);
+                advice = nadvice;
             }
         });
 
-        createBtn = findViewById(R.id.createBtn);
-        createBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToCreateGroup();
-                 }
-        });
-    }
-
-    private void goToCreateGroup() {
-        Intent intent = new Intent(this, CreateGroupActivity.class);
-        launcher.launch(intent);
     }
 
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
@@ -113,30 +108,36 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     }
 
     @Override
-    public void onGroupClicked(int index) {
-        ArrayList<Group> ml = lgroups.getValue();
-        showDialogue(ml.get(index));
+    public void onAdviceClicked(int index) {
+        ArrayList<Advice> ml = ladvice.getValue();
+       // showAdvice(ml.get(index).getTitle());
+    }
+
+   /* private void showAdvice(String title){
+        Intent i = new Intent(this, ChosenAdviceActivity.class);
+        Bundle b = new Bundle();
+        b.putSerializable("Title", title);
+        i.putExtras(b);
+        launcher.launch(i);
     }
 
     //show a dialogue
-    private void showDialogue(Group g){
+    //Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
+    private void showDialogue(Advice a){
+        //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+        //launcher.launch(browserIntent);
+
         //create a dialogue popup - and show it
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+       /*AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(g.getTitle())
                 .setMessage(
                         getText(R.string.bdateTxt) +" " + g.getBdate() + "\n\n" +
-                        getText(R.string.contactTxt) +" " + g.getContact() + "\n\n" +
-                        getText(R.string.phonetxt) +" " +g.getPhone() + "\n\n" +
-                        getText(R.string.place_txt) +" " + g.getPlace() + "\n\n" +
-                        getText(R.string.descriptionTxt) +"\n" + g.getDescription())
+                                getText(R.string.contactTxt) +" " + g.getContact() + "\n\n" +
+                                getText(R.string.phonetxt) +" " +g.getPhone() + "\n\n" +
+                                getText(R.string.place_txt) +" " + g.getPlace() + "\n\n" +
+                                getText(R.string.descriptionTxt) +"\n" + g.getDescription())
                 .setPositiveButton(R.string.signUpGroup, (dialogInterface, i) -> signUpForGroup())
-        .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
-        builder.create().show();
-    }
-
-    private void signUpForGroup() {
-        Toast.makeText(FHApplication.getAppContext(), getText(R.string.signUpGroup)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
-
-    }
-
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
+        builder.create().show();*/
+    //}
 }

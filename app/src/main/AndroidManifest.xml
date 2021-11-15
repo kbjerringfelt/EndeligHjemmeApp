@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".ActivitiesUI.advice.ChosenAdviceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivitiesUI.NotDone.MoodGraphActivity"
             android:exported="false" />
         <activity
@@ -33,7 +36,7 @@
             android:name=".ActivitiesUI.NotDone.ThisWeekActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.NotDone.AdviceActivity"
+            android:name=".ActivitiesUI.advice.AdviceActivity"
             android:exported="false" />
         <activity
             android:name=".ActivitiesUI.support.SupportActivity"

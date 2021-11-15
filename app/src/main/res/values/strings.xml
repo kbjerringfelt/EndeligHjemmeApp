@@ -63,8 +63,8 @@
     <string name="createBtn">Create group</string>
     <string name="passwordBtn">Forgot/change PIN</string>
     <string name="surelogOut">Sign out</string>
-   <string name="logoutDialog">Sure you want to sign out?</string>
-   <string name="moodOverviewBtn">Overview</string>
+    <string name="logoutDialog">Sure you want to sign out?</string>
+    <string name="moodOverviewBtn">Overview</string>
 
 
 </resources>

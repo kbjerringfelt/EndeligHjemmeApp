@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 
 public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHolder>{

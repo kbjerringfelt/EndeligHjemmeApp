@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.AdviceActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.advice.AdviceActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CheckListActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.ThisWeekActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.group.GroupListActivity;

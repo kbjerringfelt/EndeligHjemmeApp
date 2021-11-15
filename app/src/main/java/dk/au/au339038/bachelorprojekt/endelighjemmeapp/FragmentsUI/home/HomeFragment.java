@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class HomeFragment extends Fragment {
     private LiveData<User> user;
     private FragmentHomeBinding binding;
     private TextView textView;
+    private ImageView logo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         textView = binding.textHome;
+        logo = binding.logoimage;
+
+        logo.setImageResource(R.drawable.logo);
 
 
         return root;

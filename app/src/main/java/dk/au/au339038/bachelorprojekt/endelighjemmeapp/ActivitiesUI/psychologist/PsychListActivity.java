@@ -8,23 +8,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-
 import java.util.ArrayList;
 
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.MenuActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.PsychAdapter;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 // To get the data from Firebase I used this tutorial: https://www.youtube.com/watch?v=Az4gXQAP-a4
@@ -67,9 +61,9 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
             public void onChanged(ArrayList<Psychologist> psychs) {
                 for (Psychologist p : psychs)
                 {
-                    if (p.getArea().equals( _user.getArea())){
+                   // if (p.getArea().equals( _user.getArea())){
                         psychologists.add(p);
-                    }
+                    //}
 
                 }
                 psychAdapter.updateMHPList(psychologists);
