@@ -68,6 +68,7 @@ public class Repository {
         //loadGroupData();
         loadData("psychologists", "p");
         loadData("groups", "g");
+        loadData("advice", "a");
         loadSupportData();
 
         Date currentDate = new Date();
@@ -94,7 +95,9 @@ public class Repository {
 
     public MutableLiveData<Mood> getMood() {return mood;}
 
-
+    public LiveData<ArrayList<Advice>> getAdvice() {
+        return advice;
+    }
 
     public LiveData<User> loadTheUser(String userId){
         loadUser(userId);

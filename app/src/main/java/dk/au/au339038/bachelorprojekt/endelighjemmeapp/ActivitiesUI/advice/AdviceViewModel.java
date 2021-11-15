@@ -16,7 +16,7 @@ public class AdviceViewModel extends ViewModel {
 
     public AdviceViewModel(){
         repository = Repository.getInstance();
-        //advice = repository.getAdvice();
+        advice = repository.getAdvice();
     }
 
     public LiveData<ArrayList<Advice>> getAdvice() {

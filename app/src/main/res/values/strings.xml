@@ -65,6 +65,7 @@
     <string name="surelogOut">Sign out</string>
     <string name="logoutDialog">Sure you want to sign out?</string>
     <string name="moodOverviewBtn">Overview</string>
+    <string name="goToLink">Open link</string>
 
 
 </resources>

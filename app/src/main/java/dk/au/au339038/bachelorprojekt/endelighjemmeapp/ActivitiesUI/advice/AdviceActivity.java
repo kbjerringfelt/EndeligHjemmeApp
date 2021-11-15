@@ -110,34 +110,23 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
     @Override
     public void onAdviceClicked(int index) {
         ArrayList<Advice> ml = ladvice.getValue();
-       // showAdvice(ml.get(index).getTitle());
+        showDialogue(ml.get(index));
     }
 
-   /* private void showAdvice(String title){
-        Intent i = new Intent(this, ChosenAdviceActivity.class);
-        Bundle b = new Bundle();
-        b.putSerializable("Title", title);
-        i.putExtras(b);
-        launcher.launch(i);
+   private void goToLink(String link){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        launcher.launch(browserIntent);
     }
 
     //show a dialogue
     //Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
     private void showDialogue(Advice a){
-        //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-        //launcher.launch(browserIntent);
-
         //create a dialogue popup - and show it
-       /*AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle(g.getTitle())
-                .setMessage(
-                        getText(R.string.bdateTxt) +" " + g.getBdate() + "\n\n" +
-                                getText(R.string.contactTxt) +" " + g.getContact() + "\n\n" +
-                                getText(R.string.phonetxt) +" " +g.getPhone() + "\n\n" +
-                                getText(R.string.place_txt) +" " + g.getPlace() + "\n\n" +
-                                getText(R.string.descriptionTxt) +"\n" + g.getDescription())
-                .setPositiveButton(R.string.signUpGroup, (dialogInterface, i) -> signUpForGroup())
+       AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle(a.getTitle())
+                .setMessage(a.getText())
+                .setPositiveButton(R.string.goToLink, (dialogInterface, i) -> goToLink(a.getLink()))
                 .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
-        builder.create().show();*/
-    //}
+        builder.create().show();
+    }
 }
