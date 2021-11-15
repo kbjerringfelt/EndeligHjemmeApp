@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EndeligHjemmeApp">
         <activity
+            android:name=".ActivitiesUI.NotDone.NemIdActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivitiesUI.advice.ChosenAdviceActivity"
             android:exported="false" />
         <activity

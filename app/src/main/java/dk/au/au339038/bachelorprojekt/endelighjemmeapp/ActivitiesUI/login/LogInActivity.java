@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.HomeActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.NemIdActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
@@ -35,6 +37,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button logInButton, changePin;
     private EditText userText;
     private String userId;
+    private int wrongPin;
 
 
 
@@ -43,6 +46,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        wrongPin = 0;
         logInButton = findViewById(R.id.logInBtn);
         userText = findViewById(R.id.pinText);
 
@@ -74,6 +78,7 @@ public class LogInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String s = userText.getText().toString();
                 if(s.equals("")){
+                    wrongPin++;
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -84,9 +89,13 @@ public class LogInActivity extends AppCompatActivity {
                         //finish();
                     }
                     if (i == 0) {
+                        wrongPin++;
                         Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
 
                     }
+                }
+                if (wrongPin>=3){
+                    toNemID();
                 }
             }
         });
@@ -103,6 +112,13 @@ public class LogInActivity extends AppCompatActivity {
         i.putExtras(b);
         launcher.launch(i);
     }
+
+    private void toNemID(){
+        Intent intent = new Intent(this, NemIdActivity.class);
+        launcher.launch(intent);
+        finish();
+    }
+
     //Also from Test12 demo
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),

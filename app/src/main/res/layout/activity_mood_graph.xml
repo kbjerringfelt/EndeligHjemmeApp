@@ -12,7 +12,7 @@
         tools:context=".ActivitiesUI.NotDone.CheckListActivity">
 
         <ImageView
-            android:id="@+id/mockupmoodgraph"
+            android:id="@+id/mockupchecklist"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
@@ -21,14 +21,14 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/text_moodgraph"
+            app:layout_constraintBottom_toTopOf="@+id/text_checklist"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/text_moodgraph"
+            android:id="@+id/text_checklist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_moodgraph"
+        app:layout_constraintBottom_toTopOf="@+id/text_checklist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

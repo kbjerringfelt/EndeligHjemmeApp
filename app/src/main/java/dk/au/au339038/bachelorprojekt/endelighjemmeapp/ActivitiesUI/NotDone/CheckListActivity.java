@@ -17,9 +17,9 @@ public class CheckListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_list);
 
-        ImageView image = findViewById(R.id.mockupmoodgraph);
+        ImageView image = findViewById(R.id.mockupchecklist);
         image.setImageResource(R.mipmap.tjekliste);
-        TextView text = findViewById(R.id.text_moodgraph);
+        TextView text = findViewById(R.id.text_checklist);
         text.setText(R.string.not_implemented);
 
     }
