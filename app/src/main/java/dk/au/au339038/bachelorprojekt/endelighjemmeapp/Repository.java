@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Advice;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
@@ -43,6 +44,7 @@ public class Repository {
     private static Repository instance;
     private MutableLiveData<ArrayList<Psychologist>> psychs;
     private MutableLiveData<ArrayList<Group>> groups;
+    private MutableLiveData<ArrayList<Advice>> advice;
     private MutableLiveData<Support> support;
     private MutableLiveData<Mood> mood;
     private MutableLiveData<User> user;
@@ -62,8 +64,10 @@ public class Repository {
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
         _pin = db.pinDAO().getPin();
-        loadPsychData();
-        loadGroupData();
+        //loadPsychData();
+        //loadGroupData();
+        loadData("psychologists", "p");
+        loadData("groups", "g");
         loadSupportData();
 
         Date currentDate = new Date();
@@ -122,7 +126,59 @@ public class Repository {
     }
 
     //Load data methods, from https://firebase.google.com/docs/firestore/query-data/get-data.
-    private void loadPsychData() {
+    private void loadData(String collectionName, String type) {
+        fdb.collection(collectionName)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot valueg, @Nullable FirebaseFirestoreException error) {
+                        if(valueg != null && !valueg.isEmpty()){
+                                if(type.equals("p")) {
+                                    ArrayList<Psychologist> updatedPsychologists = new ArrayList<>();
+                                    for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                        Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                        Psychologist p = docg.toObject(Psychologist.class);
+                                        if (p != null) {
+                                            updatedPsychologists.add(p);
+                                        }
+                                    }
+                                    if (psychs == null) {
+                                        psychs = new MutableLiveData<ArrayList<Psychologist>>();
+                                    }
+                                    psychs.setValue(updatedPsychologists);
+                                }
+                                if(type.equals("g")){
+                                    ArrayList<Group> updatedGroups = new ArrayList<>();
+                                    for(DocumentSnapshot docg : valueg.getDocuments()) {
+                                        Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                        Group g = docg.toObject(Group.class);
+                                        if (g != null) {
+                                            updatedGroups.add(g);
+                                        }
+                                    }
+                                    if (groups == null) {
+                                        groups = new MutableLiveData<ArrayList<Group>>();
+                                    }
+                                    groups.setValue(updatedGroups);
+                                }
+                                if(type.equals("a")) {
+                                    ArrayList<Advice> updatedAdvice = new ArrayList<>();
+                                    for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                        Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                        Advice a = docg.toObject(Advice.class);
+                                        if (a != null) {
+                                            updatedAdvice.add(a);
+                                        }
+                                    }
+                                    if (advice == null) {
+                                        advice = new MutableLiveData<ArrayList<Advice>>();
+                                    }
+                                    advice.setValue(updatedAdvice);
+                                }
+                            }
+                        }
+                });
+    }
+   /* private void loadPsychData() {
         fdb.collection("psychologists")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -145,8 +201,8 @@ public class Repository {
                 });
 
 
-    }
-    private void loadGroupData() {
+    }*/
+   /* private void loadGroupData() {
                 fdb.collection("groups")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -167,7 +223,9 @@ public class Repository {
                         }
                     }
                 });
-    }
+    }*/
+
+
     private void loadSupportData() {
         DocumentReference docRef = fdb.collection("support").document("supportinfo");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
