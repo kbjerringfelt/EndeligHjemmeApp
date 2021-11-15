@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CreateGroupActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.GroupAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
@@ -38,6 +40,8 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
     private GroupAdapter groupAdapter;
     private LiveData<ArrayList<Group>> lgroups;
     private ArrayList<Group> groups;
+    private LiveData<User> user;
+    private User _user;
     GroupViewModel gvm;
     private Button createBtn;
 
@@ -55,12 +59,25 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
 
         groups = new ArrayList<Group>();
 
+        user = gvm.getUser();
+        user.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                _user = user;
+            }
+        });
+
         lgroups = gvm.getGroups();
         lgroups.observe(this, new Observer<ArrayList<Group>>() {
             @Override
             public void onChanged(ArrayList<Group> ngroups) {
-                groupAdapter.updateMHPList(ngroups);
-                groups = ngroups;
+                for (Group g : ngroups)
+                {
+                    if (g.getArea().equals( _user.getArea())){
+                        groups.add(g);
+                    }
+                }
+                groupAdapter.updateMHPList(groups);
             }
         });
 

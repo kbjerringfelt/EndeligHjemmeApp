@@ -1,7 +1,7 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
 public class Group {
-    private String title, bdate, contact, place, description;
+    private String title, bdate, contact, place, description, area;
     private int phone;
 
 
@@ -63,5 +63,13 @@ public class Group {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }

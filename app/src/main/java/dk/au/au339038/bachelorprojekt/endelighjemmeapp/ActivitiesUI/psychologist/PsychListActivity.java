@@ -61,10 +61,9 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
             public void onChanged(ArrayList<Psychologist> psychs) {
                 for (Psychologist p : psychs)
                 {
-                   // if (p.getArea().equals( _user.getArea())){
+                    if (p.getArea().equals( _user.getArea())){
                         psychologists.add(p);
-                    //}
-
+                    }
                 }
                 psychAdapter.updateMHPList(psychologists);
             }
