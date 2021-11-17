@@ -92,10 +92,9 @@ public class Repository {
         return advice;
     }
 
-    public LiveData<User> loadTheUser(String userId){
+    public void loadTheUser(String userId){
         loadDocument("users", userId, "u");
         loadDocument("mood"+userId, dateOnly, "m");
-        return user;
     }
 
     public LiveData<User> getUser(){
