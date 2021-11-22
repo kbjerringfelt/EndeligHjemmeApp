@@ -11,27 +11,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Regions;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.PsychAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 // To get the data from Firebase I used this tutorial: https://www.youtube.com/watch?v=Az4gXQAP-a4
-public class PsychListActivity extends AppCompatActivity implements PsychAdapter.IPsychItemClickedListener {
+public class PsychListActivity extends AppCompatActivity implements PsychAdapter.IPsychItemClickedListener, AdapterView.OnItemSelectedListener {
 
     public static final String TAG = "LogF";
     private RecyclerView prcv;
     private PsychAdapter psychAdapter;
     private LiveData<ArrayList<Psychologist>> lpsychologists;
+    private LiveData<ArrayList<Regions>> lcommunities;
+    private List<String> communities;
     private LiveData<User> user;
     private ArrayList<Psychologist> psychologists;
     private User _user;
     PsychViewModel pvm;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,7 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         setContentView(R.layout.activity_psychologist);
 
         pvm = new ViewModelProvider(this).get(PsychViewModel.class);
+        textView = findViewById(R.id.textViewpsych);
 
         psychAdapter = new PsychAdapter(this);
         prcv = findViewById(R.id.rcv_psych);
@@ -46,6 +59,7 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         prcv.setAdapter(psychAdapter);
 
         psychologists = new ArrayList<Psychologist>();
+        communities = new ArrayList<String>();
 
         user = pvm.getUser();
         user.observe(this, new Observer<User>() {
@@ -55,22 +69,66 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
             }
         });
 
+        lcommunities = pvm.getCommunities();
+        lcommunities.observe(this, new Observer<ArrayList<Regions>>() {
+            @Override
+            public void onChanged(ArrayList<Regions> regions) {
+                for (Regions r : regions)
+                {
+                    for(String s : r.getCommunities()){
+                        communities.add(s);
+                    }
+                }
+                // sort alphabetically: https://stackoverflow.com/questions/708698/how-can-i-sort-a-list-alphabetically
+                Collections.sort(communities);
+                //default choice in spinner: https://www.tutorialspoint.com/how-to-make-an-android-spinner-with-initial-default-text
+                communities.add(0, "" + getText(R.string.spinnerDefault));
+                setUpSpinner();
+            }
+        });
+
         lpsychologists = pvm.getPsychologists();
         lpsychologists.observe(this, new Observer<ArrayList<Psychologist>>() {
             @Override
             public void onChanged(ArrayList<Psychologist> psychs) {
                 for (Psychologist p : psychs)
                 {
-                    if (p.getArea().equals( _user.getArea())){
                         psychologists.add(p);
-                    }
                 }
-                psychAdapter.updateMHPList(psychologists);
+                updateList(user.getValue().getArea());
             }
         });
-        // psychAdapter.updateMHPList(psychologists);*/
     }
 
+    private void updateList(String area){
+        ArrayList<Psychologist> newPsychologists = new ArrayList<Psychologist>();
+        for (Psychologist p : psychologists)
+        {
+            if(area.equals(getText(R.string.spinnerDefault))){
+                area = user.getValue().getArea();
+            }
+            if (p.getArea().equals(area)){
+                newPsychologists.add(p);
+            }
+        }
+        psychAdapter.updateMHPList(newPsychologists);
+        if(newPsychologists.size() == 0){
+            textView.setText(getText(R.string.noDataArea));
+        }
+        else{
+            textView.setText("");
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+        updateList(item);
+
+    }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        updateList(user.getValue().getArea());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,6 +170,24 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
                 getText(R.string.moreinfo) +"\n" + psychologist.getMoreinfo())
         .setNegativeButton(R.string.backBtn, (dialogInterface, i) -> {});
         builder.create().show();
+    }
+
+    //Spinner in this class is based on the toturial from: https://www.tutorialspoint.com/android/android_spinner_control.htm
+    private void setUpSpinner(){
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.psychSpinner);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, communities);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
     }
 
 }

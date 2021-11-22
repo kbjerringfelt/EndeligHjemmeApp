@@ -22,13 +22,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/areaBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="@string/areaBtn" />
-
             <Switch
                 android:id="@+id/faceId_switch"
                 android:layout_width="match_parent"
@@ -52,14 +45,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="@string/childBtn" />
+                android:text="@string/childBtn"
+                app:backgroundTint="@color/ic_mood_10_background" />
 
             <Button
                 android:id="@+id/supportBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="@string/supportTxt" />
+                android:text="@string/supportTxt"
+                app:backgroundTint="@color/ic_mood_10_background" />
 
         </LinearLayout>
     </ScrollView>

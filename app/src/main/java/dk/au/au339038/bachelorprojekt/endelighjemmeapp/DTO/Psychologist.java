@@ -7,13 +7,8 @@ public class Psychologist {
 
     public Psychologist(){}
 
-    public Psychologist(String name, String specialty, String insurance, String city){
+    public Psychologist(String name){
         this.name = name;
-        this.specialty = specialty;
-        this.insurance = insurance;
-        this.city = city;
-
-
     }
 
     public String getCity() {

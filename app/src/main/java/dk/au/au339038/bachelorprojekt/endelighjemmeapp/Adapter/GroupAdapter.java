@@ -23,7 +23,7 @@ public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHo
         this.groupListener = groupListener;
     }
 
-    public void updateMHPList(ArrayList<Group> lists){
+    public void updateGroupList(ArrayList<Group> lists){
         groupList = lists;
         notifyDataSetChanged();
     }

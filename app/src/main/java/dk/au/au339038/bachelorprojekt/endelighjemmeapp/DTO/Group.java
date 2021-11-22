@@ -5,13 +5,8 @@ public class Group {
     private int phone;
 
 
-    public Group(String title, String contact, String bdate, String place, String description){
+    public Group(String title){
         this.title = title;
-        this.description = description;
-        this.bdate = bdate;
-        this.contact = contact;
-        this.place = place;
-
     }
 
     public Group(){

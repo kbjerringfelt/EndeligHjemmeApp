@@ -8,18 +8,21 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Regions;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Repository;
 
 public class PsychViewModel extends ViewModel {
     private Repository repository;
     LiveData<ArrayList<Psychologist>> psychologists;
+    LiveData<ArrayList<Regions>> communities;
     LiveData<User> user;
 
     public PsychViewModel(){
         repository = Repository.getInstance();
         psychologists = repository.getPsychologists();
         user = repository.getUser();
+        communities = repository.getCommunities();
     }
 
     public LiveData<ArrayList<Psychologist>> getPsychologists() {
@@ -38,6 +41,13 @@ public class PsychViewModel extends ViewModel {
             user = new MutableLiveData<User>();
         }
         return user;
+    }
+
+    LiveData<ArrayList<Regions>> getCommunities(){
+        if (communities == null){
+            communities = new MutableLiveData<ArrayList<Regions>>();
+        }
+        return communities;
     }
 
 }

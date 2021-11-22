@@ -14,14 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.EditAreaActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.EditChildActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.support.SupportActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button supportBtn, area, childEdit;
+    private Button supportBtn, childEdit;
     private Switch touch, face;
 
     @Override
@@ -37,14 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        area = findViewById(R.id.areaBtn);
-        area.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               goToEditArea();
-            }
-        });
-
         childEdit = findViewById(R.id.childBtn);
         childEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,21 +45,13 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    private void goToEditArea() {
-        Intent intent = new Intent(this, EditAreaActivity.class);
-        launcher.launch(intent);
-    }
+
 
     private void goToChildEdit() {
         Intent intent = new Intent(this, EditChildActivity.class);
         launcher.launch(intent);
     }
 
-    private void goToLogIn(){
-        /*Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("IntResult", 1);
-        finish();*/
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);

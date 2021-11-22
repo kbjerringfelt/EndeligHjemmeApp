@@ -67,6 +67,8 @@
     <string name="logoutDialog">Er du sikker på du vil logge ud? </string>
     <string name="moodOverviewBtn">Oversigt</string>
     <string name="goToLink">Åben link</string>
+    <string name="noDataArea">Ingen i denne kommune.</string>
+    <string name="spinnerDefault">Sorter efter kommune:</string>
 
 
 </resources>

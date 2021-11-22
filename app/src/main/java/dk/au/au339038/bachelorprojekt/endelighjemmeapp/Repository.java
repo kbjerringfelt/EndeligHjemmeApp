@@ -8,10 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -28,6 +26,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Advice;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Regions;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
@@ -45,6 +44,7 @@ public class Repository {
     private MutableLiveData<ArrayList<Psychologist>> psychs;
     private MutableLiveData<ArrayList<Group>> groups;
     private MutableLiveData<ArrayList<Advice>> advice;
+    private MutableLiveData<ArrayList<Regions>> communities;
     private MutableLiveData<Support> support;
     private MutableLiveData<Mood> mood;
     private MutableLiveData<User> user;
@@ -64,8 +64,10 @@ public class Repository {
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
         _pin = db.pinDAO().getPin();
+
         loadData("psychologists", "p");
         loadData("groups", "g");
+        loadData("denmark", "c");
         loadData("advice", "a");
         loadDocument("support", "supportinfo", "s");
 
@@ -80,6 +82,10 @@ public class Repository {
 
     public LiveData<ArrayList<Group>> getGroups(){
         return groups;
+    }
+
+    public LiveData<ArrayList<Regions>> getCommunities(){
+        return communities;
     }
 
     public LiveData<Support> getSupport(){
@@ -103,22 +109,23 @@ public class Repository {
         }
         return user;}
 
-    public LiveData<Pin> getPin(){
-        if(_pin == null){
+    public LiveData<Pin> getPin() {
+        if (_pin == null) {
             _pin = new MutableLiveData<Pin>();
         }
         return _pin;
     }
 
-    public void setPinAsynch(Pin p){
+        public void setPinAsynch (Pin p){
 
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                db.pinDAO().insertPin(p);
-            }
-        });
-    }
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    db.pinDAO().insertPin(p);
+                }
+            });
+        }
+
 
     //Load data methods, from https://firebase.google.com/docs/firestore/query-data/get-data.
     private void loadData(String collectionName, String type) {
@@ -168,6 +175,20 @@ public class Repository {
                                         advice = new MutableLiveData<ArrayList<Advice>>();
                                     }
                                     advice.setValue(updatedAdvice);
+                                }
+                                if(type.equals("c")) {
+                                    ArrayList<Regions> updatedCommunities = new ArrayList<>();
+                                    for (DocumentSnapshot docg : valueg.getDocuments()) {
+                                        Log.d(TAG, "DocumentSnapshot data: " + docg.getData());
+                                        Regions c = docg.toObject(Regions.class);
+                                        if (c != null) {
+                                            updatedCommunities.add(c);
+                                        }
+                                    }
+                                    if (communities == null) {
+                                        communities = new MutableLiveData<ArrayList<Regions>>();
+                                    }
+                                    communities.setValue(updatedCommunities);
                                 }
                             }
                         }

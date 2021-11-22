@@ -38,12 +38,12 @@ public class MoodViewModel extends ViewModel {
 
     }
 
-    public LiveData<User> getUser() {
+    /*public LiveData<User> getUser() {
         if(user == null){
             user= new MutableLiveData<User>();
         }
         return user;
-    }
+    }*/
 
     public void updateMood(String date, Mood m){
         int newmood = m.getMood();

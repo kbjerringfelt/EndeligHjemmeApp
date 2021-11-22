@@ -43,7 +43,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     public void onBindViewHolder(@NonNull PsychViewHolder viewHolder, int position) {
         viewHolder.name.setText(mhpList.get(position).getName());
         viewHolder.insurance.setText(mhpList.get(position).getInsurance());
-        viewHolder.city.setText("" + mhpList.get(position).getCity());
+        viewHolder.city.setText(mhpList.get(position).getCity());
 
     }
 

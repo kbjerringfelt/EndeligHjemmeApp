@@ -17,33 +17,40 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ActivitiesUI.NotDone.CreateGroupActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Regions;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Adapter.GroupAdapter;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
-public class GroupListActivity extends AppCompatActivity implements GroupAdapter.IGroupItemClickedListener {
+public class GroupListActivity extends AppCompatActivity implements GroupAdapter.IGroupItemClickedListener, AdapterView.OnItemSelectedListener {
 
     public static final String TAG = "LogF";
     private RecyclerView grcv;
     private GroupAdapter groupAdapter;
     private LiveData<ArrayList<Group>> lgroups;
     private ArrayList<Group> groups;
+    private LiveData<ArrayList<Regions>> lcommunities;
+    private List<String> communities;
     private LiveData<User> user;
     private User _user;
     GroupViewModel gvm;
     private Button createBtn;
+    private Spinner chosenArea;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,10 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         grcv.setLayoutManager(new LinearLayoutManager(this));
         grcv.setAdapter(groupAdapter);
 
+        textView = findViewById(R.id.textViewgroup);
         groups = new ArrayList<Group>();
+        communities = new ArrayList<String>();
+
 
         user = gvm.getUser();
         user.observe(this, new Observer<User>() {
@@ -67,17 +77,31 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
             }
         });
 
+        lcommunities = gvm.getCommunities();
+        lcommunities.observe(this, new Observer<ArrayList<Regions>>() {
+            @Override
+            public void onChanged(ArrayList<Regions> regions) {
+                for (Regions r : regions)
+                {
+                    for(String s : r.getCommunities()){
+                        communities.add(s);
+                    }
+                }
+                Collections.sort(communities);
+                communities.add(0, "" + getText(R.string.spinnerDefault));
+                setUpSpinner();
+            }
+        });
+
         lgroups = gvm.getGroups();
         lgroups.observe(this, new Observer<ArrayList<Group>>() {
             @Override
             public void onChanged(ArrayList<Group> ngroups) {
                 for (Group g : ngroups)
                 {
-                    if (g.getArea().equals( _user.getArea())){
                         groups.add(g);
-                    }
                 }
-                groupAdapter.updateMHPList(groups);
+                updateList(user.getValue().getArea());
             }
         });
 
@@ -88,6 +112,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 goToCreateGroup();
                  }
         });
+
     }
 
     private void goToCreateGroup() {
@@ -112,6 +137,36 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 }
             });
 
+    private void updateList(String area){
+        ArrayList<Group> newGroups = new ArrayList<Group>();
+        for (Group g : groups)
+        {
+            if(area.equals(getText(R.string.spinnerDefault))){
+                area = user.getValue().getArea();
+            }
+            if (g.getArea().equals(area)){
+                newGroups.add(g);
+            }
+        }
+        groupAdapter.updateGroupList(newGroups);
+        if(newGroups.size() == 0){
+            textView.setText(getText(R.string.noDataArea));
+        }
+        else{
+            textView.setText("");
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String item = parent.getItemAtPosition(position).toString();
+        updateList(item);
+
+        }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        updateList(user.getValue().getArea());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
@@ -125,7 +180,6 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         if (id == R.id.bar_menu) {
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -149,6 +203,25 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 .setPositiveButton(R.string.signUpGroup, (dialogInterface, i) -> signUpForGroup())
         .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
         builder.create().show();
+    }
+
+    //Spinner in this class is based on the toturial from: https://www.tutorialspoint.com/android/android_spinner_control.htm
+    private void setUpSpinner(){
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.groupSpinner);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, communities);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
+
     }
 
     private void signUpForGroup() {
