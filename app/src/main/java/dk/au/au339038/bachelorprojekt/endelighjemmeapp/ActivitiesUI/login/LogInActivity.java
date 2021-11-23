@@ -53,9 +53,11 @@ public class LogInActivity extends AppCompatActivity {
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
-       // if(pin == null){
-         //   pin = new MutableLiveData<Pin>();
-       //}
+        //Hvis vi havde implementeret oprettelsen af Pinkode, ville dette være unødvendigt.
+        if(thepin == null) {
+            loadTestUser(thepin);
+        }
+
         pin = lvm.getPin();
         pin.observe(this, new Observer<Pin>() {
             @Override
@@ -65,10 +67,6 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
-        //Hvis vi havde implementeret oprettelsen af Pinkode, ville dette være unødvendigt.
-        if(thepin == null) {
-             loadTestUser(thepin);
-        }
 
         changePin = findViewById(R.id.newPasswordBtn);
         changePin.setOnClickListener(new View.OnClickListener() {

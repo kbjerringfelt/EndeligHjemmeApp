@@ -50,7 +50,7 @@ public class MoodFragment extends Fragment {
     private LiveData<Mood> thisMood;
     private Mood moodToday;
     private SeekBar moodSkb;
-    private TextView moodNumber;
+    private TextView moodNumber, moodGuide, enteredMood;
     private String dateOnly;
     private Button saveBtn, overviewBtn;
 
@@ -69,7 +69,8 @@ public class MoodFragment extends Fragment {
         moodSkb = binding.seekBarMood;
         overviewBtn = binding.moodOverviewBtn;
         final TextView moodDate = binding.moodDate;
-        final TextView moodGuide = binding.textViewGuide;
+        moodGuide = binding.textViewGuide;
+        enteredMood = binding.textEnteredMood;
 
 
         //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
@@ -77,7 +78,6 @@ public class MoodFragment extends Fragment {
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
         moodDate.setText(dateOnly);
-        moodGuide.setText(R.string.moodHowTo);
 
              ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -96,7 +96,6 @@ public class MoodFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), MoodGraphActivity.class);
                 launcher.launch(i);
-
             }
         });
 
@@ -108,9 +107,6 @@ public class MoodFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-       // String userId = (String) getActivity().getIntent().getSerializableExtra("userID");
-
-
         mvm = new ViewModelProvider(this).get(MoodViewModel.class);
         thisMood = mvm.getMood();
         thisMood.observe(this.getViewLifecycleOwner(), new Observer<Mood>() {
@@ -119,11 +115,11 @@ public class MoodFragment extends Fragment {
                 moodToday = m;
                 im = moodToday.getMood();
                 if(im !=11) {
-                    updateUI(im);
+                    updateUI(im, "" + getText(R.string.alreadySavedMood));
                 }
                 else {
                     int i = 1;
-                    updateUI(i);
+                    updateUI(i, "");
                 }
             }
         });
@@ -136,7 +132,7 @@ public class MoodFragment extends Fragment {
                 n = progress + 1;
                 setImage(n);
                 moodNumber.setText("" + n);
-               // mvm.getMood().getValue().setMood(n);
+                mvm.getMood().getValue().setMood(n);
             }
 
             @Override
@@ -170,10 +166,6 @@ public class MoodFragment extends Fragment {
                 }
             }
         });
-
-
-
-
     }
 
 
@@ -189,10 +181,12 @@ public class MoodFragment extends Fragment {
         Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
     }
 
-    private void updateUI(int i) {
+    private void updateUI(int i, String alreadyMood) {
         int mi = (i-1);
         moodSkb.setProgress(mi);
         moodNumber.setText("" + i);
+        moodGuide.setText(getText(R.string.moodHowTo));
+        enteredMood.setText(alreadyMood);
         setImage(i);
 
     }

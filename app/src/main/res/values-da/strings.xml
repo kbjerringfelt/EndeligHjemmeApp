@@ -51,10 +51,11 @@
     <string name="enterPin">Skriv PIN</string>
     <string name="enterPinTxt">Skriv PIN</string>
     <string name="wishBtn">Ønsker til appen? Send os forslag her:</string>
-    <string name="wishButton">Send ønske</string>
+    <string name="wishButton">Ønskeknappen</string>
     <string name="saveBtn">Gem</string>
 
     <string name="saveDialog">Du har allerede gemt humør i dag. Vil du overskrive?</string>
+    <string name="alreadySavedMood">Du har allerede gemt humør i dag.</string>
     <string name="saveMood">Gem humør</string>
     <string name="cancel">Annuller</string>
     <string name="saveAnyway">Gem alligevel</string>

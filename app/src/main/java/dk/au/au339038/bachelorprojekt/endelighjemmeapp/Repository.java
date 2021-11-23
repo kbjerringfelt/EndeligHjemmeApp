@@ -116,15 +116,14 @@ public class Repository {
         return _pin;
     }
 
-        public void setPinAsynch (Pin p){
-
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
+    public void setPinAsynch (Pin p){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
                     db.pinDAO().insertPin(p);
                 }
-            });
-        }
+        });
+    }
 
 
     //Load data methods, from https://firebase.google.com/docs/firestore/query-data/get-data.

@@ -18,9 +18,6 @@
             android:name=".ActivitiesUI.NotDone.NemIdActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivitiesUI.advice.ChosenAdviceActivity"
-            android:exported="false" />
-        <activity
             android:name=".ActivitiesUI.NotDone.MoodGraphActivity"
             android:exported="false" />
         <activity
