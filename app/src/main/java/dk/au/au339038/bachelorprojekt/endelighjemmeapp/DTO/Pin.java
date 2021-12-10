@@ -11,18 +11,18 @@ public class Pin{
 
     private String uid;
 
-    private int pin = 1000000;
+    private String pin = "1000000";
 
-    public Pin(int pin, String uid){
+    public Pin(String pin, String uid){
         this.uid = uid;
         this.pin = pin;
     }
 
-    public int getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 

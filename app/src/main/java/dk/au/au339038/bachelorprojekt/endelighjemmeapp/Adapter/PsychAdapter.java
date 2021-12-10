@@ -59,9 +59,9 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
     //Lavet ud fra PersonViewHolder i Lists and grids demoen
     public class PsychViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView name, specialty, city, insurance;
+        private TextView name, specialty, city, insurance;
 
-        IPsychItemClickedListener psychListener;
+       private IPsychItemClickedListener psychListener;
 
         public PsychViewHolder(@NonNull View itemView, IPsychItemClickedListener psychItemClickedListener) {
             super(itemView);

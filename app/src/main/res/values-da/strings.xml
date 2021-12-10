@@ -63,13 +63,15 @@
     <string name="moodSaved">Humøret er gemt.</string>
     <string name="moodHowTo">Her kan du indtaste dagens humør. Dette kan hjælpe med at give et overblik over humøret for en periode.</string>
     <string name="createBtn">Opret gruppe</string>
-    <string name="passwordBtn">Glemt/ændre PIN</string>
+    <string name="passwordBtn">Opret bruger eller Glemt/ændre PIN</string>
     <string name="surelogOut" >Log ud</string>
     <string name="logoutDialog">Er du sikker på du vil logge ud? </string>
     <string name="moodOverviewBtn">Oversigt</string>
     <string name="goToLink">Åben link</string>
     <string name="noDataArea">Ingen i denne kommune.</string>
     <string name="spinnerDefault">Sorter efter kommune:</string>
+    <string name="drawConsentBtn">Slet sammentykke</string>
+    <string name="changePinBtn">Skift pinkode</string>
 
 
 </resources>

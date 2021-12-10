@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 
-@Database(entities = {Pin.class}, version = 5)
+@Database(entities = {Pin.class}, version = 7)
 public abstract class AppsDatabase extends RoomDatabase {
 
     public abstract PinDAO pinDAO();  //mandatory DAO getter

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivitiesUI.login.LogInActivity">
+    tools:context=".Activities.login.LogInActivity">
 
     <Button
         android:id="@+id/newPasswordBtn"

@@ -5,7 +5,7 @@
     android:id="@+id/btn_out"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivitiesUI.settings.SettingsActivity">
+    tools:context=".Activities.settings.SettingsActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -24,6 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/changePinBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@string/changePinBtn"
+                app:backgroundTint="@color/ic_mood_10_background" />
 
             <Switch
                 android:id="@+id/faceId_switch"
@@ -74,5 +82,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
+
+    <Button
+        android:id="@+id/drawConsentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/drawConsentBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

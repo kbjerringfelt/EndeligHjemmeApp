@@ -62,13 +62,15 @@
     <string name="moodSaved">Mood succesfully saved</string>
     <string name="moodHowTo">Here you can enter your mood for today. This can help giving an overview of the mood over a period.</string>
     <string name="createBtn">Create group</string>
-    <string name="passwordBtn">Forgot/change PIN</string>
+    <string name="passwordBtn">Sign up or Forgot/change PIN</string>
     <string name="surelogOut">Sign out</string>
     <string name="logoutDialog">Sure you want to sign out?</string>
     <string name="moodOverviewBtn">Overview</string>
     <string name="goToLink">Open link</string>
    <string name="noDataArea">None in this area</string>
    <string name="spinnerDefault">Sort by area:</string>
+    <string name="drawConsentBtn">Withdraw consent</string>
+    <string name="changePinBtn">Change pin</string>
 
 
 </resources>
