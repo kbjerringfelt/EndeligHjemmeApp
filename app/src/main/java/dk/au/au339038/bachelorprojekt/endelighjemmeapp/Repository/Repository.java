@@ -120,7 +120,10 @@ public class Repository {
     }
 
     public MutableLiveData<Mood> getMood() {
-        loadDocument("mood"+user.getValue().getId(), dateOnly, 2);
+        loadDocument("mood"+user.getValue().getId().toString(), dateOnly, 2);
+        if(mood == null){
+            mood = new MutableLiveData<>();
+        }
         return mood;}
 
     public LiveData<ArrayList<Advice>> getAdvice() {
@@ -266,6 +269,7 @@ public class Repository {
                     }
                     if(type == 2) {
                         Mood m = snapshot.toObject(Mood.class);
+                        Log.d(TAG, "DocumentSnapshot data: " + snapshot.getData());
                         if (m != null) {
                             if (mood == null) {
                                 mood = new MutableLiveData<Mood>();

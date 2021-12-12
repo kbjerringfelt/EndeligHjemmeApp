@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.mood;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.FragmentsUI.mood;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -30,10 +30,9 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.Home.HomeActivity;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.MenuActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.NotDone.MoodGraphActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels.MoodViewModel;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Other.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.MoodFragmentBinding;
@@ -44,11 +43,8 @@ public class MoodFragment extends Fragment {
     private MoodViewModel mvm;
     private MoodFragmentBinding binding;
     private ImageView moodImage;
-    private int n;
     private int im;
-    private String date;
     private LiveData<Mood> thisMood;
-    private Mood moodToday;
     private SeekBar moodSkb;
     private TextView moodNumber, moodGuide, enteredMood;
     private String dateOnly;
@@ -80,41 +76,8 @@ public class MoodFragment extends Fragment {
         moodDate.setText(dateOnly);
 
 
-             ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == RESULT_OK) {
-                            Intent data = result.getData();
-
-                        }
-                    }
-                });
-
-        overviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), MoodGraphActivity.class);
-                launcher.launch(i);
-            }
-        });
-
         mvm = new ViewModelProvider(this).get(MoodViewModel.class);
-        thisMood = mvm.getMood();
-        thisMood.observe(this.getViewLifecycleOwner(), new Observer<Mood>() {
-            @Override
-            public void onChanged(@Nullable Mood m) {
-                im = m.getMood();
-                if(im !=11) {
-                    updateUI(im, "" + getText(R.string.alreadySavedMood));
-                }
-                else {
-                    int i = 1;
-                    updateUI(i, "");
-                }
-            }
-        });
+
 
         moodSkb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -145,7 +108,7 @@ public class MoodFragment extends Fragment {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                             .setMessage(R.string.saveDialog)
                             .setTitle(R.string.saveMood)
-                            .setPositiveButton(R.string.saveAnyway, (dialogInterface, i) -> updateMood(newMood))
+                            .setPositiveButton(R.string.saveAnyway, (dialogInterface, i) -> saveMood(newMood))
                             .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
                     builder.create().show();
                 }
@@ -155,14 +118,44 @@ public class MoodFragment extends Fragment {
             }
         });
 
+        ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == RESULT_OK) {
+                            Intent data = result.getData();
+
+                        }
+                    }
+                });
+
+        overviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), MoodGraphActivity.class);
+                launcher.launch(i);
+            }
+        });
+
+        thisMood = mvm.getMood();
+        thisMood.observe(getActivity(), new Observer<Mood>() {
+            @Override
+            public void onChanged(@Nullable Mood m) {
+                im = m.getMood();
+                if(im !=11) {
+                    updateUI(im, "" + getText(R.string.alreadySavedMood));
+                }
+                else {
+                    int i = 1;
+                    updateUI(i, "");
+                }
+            }
+        });
+
+
+
         return root;
-    }
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
 
@@ -173,12 +166,12 @@ public class MoodFragment extends Fragment {
         updateUI(m.getMood(), getText(R.string.alreadySavedMood).toString());
     }
 
-    private void updateMood(Mood m) {
+    /*private void updateMood(Mood m) {
         im = m.getMood();
         mvm.updateMood(dateOnly, m);
         Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
         updateUI(m.getMood(), getText(R.string.alreadySavedMood).toString());
-    }
+    }*/
 
     private void updateUI(int i, String alreadyMood) {
         int mi = (i-1);

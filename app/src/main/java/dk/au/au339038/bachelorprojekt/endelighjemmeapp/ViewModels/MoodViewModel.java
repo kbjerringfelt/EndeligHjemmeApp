@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.mood;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,8 +16,8 @@ public class MoodViewModel extends ViewModel {
 
     public MoodViewModel(){
         repository = Repository.getInstance();
-        mood = repository.getMood();
         user = repository.getUser();
+        mood = repository.getMood();
     }
 
     public LiveData<Mood> getMood() {
@@ -53,10 +53,10 @@ public class MoodViewModel extends ViewModel {
         return user;
     }*/
 
-    public void updateMood(String date, Mood m){
+   /* public void updateMood(String date, Mood m){
         int newmood = m.getMood();
         repository.updateMood(user.getValue().getId(), date, newmood);
-    }
+    }*/
 
 
 }

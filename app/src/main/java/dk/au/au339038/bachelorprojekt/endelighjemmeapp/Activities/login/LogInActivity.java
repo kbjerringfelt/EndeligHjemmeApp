@@ -65,27 +65,21 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = userText.getText().toString();
-                /*if(s.equals("")){
-                    wrongPin = pin.getValue().getWrongPinCount();
-                    wrongPin ++;
-                    pin.getValue().setWrongPinCount(wrongPin);
-                    lvm.updatePin(pin.getValue());
-                    Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_LONG).show();
-                }*/
-
                 int i = validatePin(s);
-                if (i == 1) {
+                if(pin.getValue().getWrongPinCount()<=2) {
+                    if (i == 1) {
                         wrongPin = 0;
                         pin.getValue().setWrongPinCount(wrongPin);
                         lvm.updatePin(pin.getValue());
                         goToMain();
-                }
-                if (i == 0) {
+                    }
+                    if (i == 0) {
                         wrongPin = pin.getValue().getWrongPinCount();
                         wrongPin++;
                         pin.getValue().setWrongPinCount(wrongPin);
                         lvm.updatePin(pin.getValue());
                         Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
+                    }
                 }
                 if (pin.getValue().getWrongPinCount()>=3){
                     lvm.deletePin(pin.getValue());
@@ -105,7 +99,6 @@ public class LogInActivity extends AppCompatActivity {
         b.putSerializable("userID", userId);
         i.putExtras(b);
         launcher.launch(i);
-        finish();
     }
 
     private void toNemID(){
