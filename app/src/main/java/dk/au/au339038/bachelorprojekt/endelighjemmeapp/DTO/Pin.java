@@ -6,16 +6,18 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Pin{
-    @PrimaryKey( autoGenerate = true)
-    private int pid;
-
+    @PrimaryKey( autoGenerate = false)
+    @NonNull
     private String uid;
+
+    private int wrongPinCount;
 
     private String pin = "1000000";
 
-    public Pin(String pin, String uid){
+    public Pin(String pin, String uid, int wrongPinCount){
         this.uid = uid;
         this.pin = pin;
+        this.wrongPinCount = wrongPinCount;
     }
 
     public String getPin() {
@@ -34,11 +36,12 @@ public class Pin{
         this.uid = uid;
     }
 
-    public int getPid() {
-        return pid;
+    public int getWrongPinCount() {
+        return wrongPinCount;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setWrongPinCount(int wrongPinCount) {
+        this.wrongPinCount = wrongPinCount;
     }
+
 }

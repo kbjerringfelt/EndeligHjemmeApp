@@ -1,4 +1,4 @@
-package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.FragmentsUI.mood;
+package dk.au.au339038.bachelorprojekt.endelighjemmeapp.FragmentsUI.mood;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -30,11 +30,12 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.Home.HomeActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.MenuActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.NotDone.MoodGraphActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Mood;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Other.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
-import dk.au.au339038.bachelorprojekt.endelighjemmeapp.ViewModels.MoodViewModel;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.MoodFragmentBinding;
 
 public class MoodFragment extends Fragment {
@@ -43,8 +44,11 @@ public class MoodFragment extends Fragment {
     private MoodViewModel mvm;
     private MoodFragmentBinding binding;
     private ImageView moodImage;
+    private int n;
     private int im;
+    private String date;
     private LiveData<Mood> thisMood;
+    private Mood moodToday;
     private SeekBar moodSkb;
     private TextView moodNumber, moodGuide, enteredMood;
     private String dateOnly;
@@ -75,6 +79,7 @@ public class MoodFragment extends Fragment {
         dateOnly = dateFormat.format(currentDate);
         moodDate.setText(dateOnly);
 
+
              ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -95,14 +100,6 @@ public class MoodFragment extends Fragment {
             }
         });
 
-        return root;
-    }
-
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
         mvm = new ViewModelProvider(this).get(MoodViewModel.class);
         thisMood = mvm.getMood();
         thisMood.observe(this.getViewLifecycleOwner(), new Observer<Mood>() {
@@ -118,8 +115,6 @@ public class MoodFragment extends Fragment {
                 }
             }
         });
-
-
 
         moodSkb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -151,7 +146,7 @@ public class MoodFragment extends Fragment {
                             .setMessage(R.string.saveDialog)
                             .setTitle(R.string.saveMood)
                             .setPositiveButton(R.string.saveAnyway, (dialogInterface, i) -> updateMood(newMood))
-                            .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {;});
+                            .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {});
                     builder.create().show();
                 }
                 else {
@@ -159,6 +154,15 @@ public class MoodFragment extends Fragment {
                 }
             }
         });
+
+        return root;
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
 

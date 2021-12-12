@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,6 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.MenuActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Other.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.databinding.ActivityHomeBinding;
 
@@ -80,8 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        //Toast.makeText(FHApplication.getAppContext(),"No",Toast.LENGTH_SHORT).show();
+        Toast.makeText(FHApplication.getAppContext(),getText(R.string.cantgoback),Toast.LENGTH_SHORT).show();
     }
 
 }

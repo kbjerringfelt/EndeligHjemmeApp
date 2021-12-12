@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -71,11 +72,22 @@ public class Repository {
         loadData("groups", "g");
         loadData("denmark", "c");
         loadData("advice", "a");
-        loadDocument("support", "supportinfo", "s");
+        loadDocument("support", "supportinfo", 3);
 
+        //Hvis vi havde implementeret oprettelsen af Pinkode, ville dette være unødvendigt.
+        loadTestUser();
+
+        //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
+
+
+    }
+
+    private void loadTestUser(){
+        Pin thepin = new Pin("123456","0101907652", 0);
+        setPinAsynch(thepin);
     }
 
     public LiveData<ArrayList<Psychologist>> getPsychologists(){
@@ -108,7 +120,7 @@ public class Repository {
     }
 
     public MutableLiveData<Mood> getMood() {
-        loadDocument("mood"+user.getValue().getId().toString(), dateOnly, "m");
+        loadDocument("mood"+user.getValue().getId(), dateOnly, 2);
         return mood;}
 
     public LiveData<ArrayList<Advice>> getAdvice() {
@@ -116,7 +128,7 @@ public class Repository {
     }
 
     public void loadTheUser(String userId){
-        loadDocument("users", userId, "u");
+        loadDocument("users", userId, 1);
     }
 
     public LiveData<User> getUser(){
@@ -141,6 +153,23 @@ public class Repository {
         });
     }
 
+    public void updatePinAsynch (Pin p){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                db.pinDAO().updatePin(p);
+            }
+        });
+    }
+
+    public void deletePinAsynch(Pin pin) {
+        executor.execute(new Runnable() {
+           @Override
+            public void run() {
+                db.pinDAO().deletePin(pin);
+            }
+        });
+    }
 
     //Load data methods, from https://firebase.google.com/docs/firestore/query-data/get-data.
     private void loadData(String collectionName, String type) {
@@ -210,7 +239,7 @@ public class Repository {
                 });
     }
 
-    private void loadDocument(String collectionName, String documentName, String type) {
+    private void loadDocument(String collectionName, String documentName, int type) {
         final DocumentReference docRef = fdb.collection(collectionName).document(documentName);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -226,7 +255,7 @@ public class Repository {
 
                 if (snapshot != null && snapshot.exists()) {
                     Log.d(TAG, source + " data: " + snapshot.getData());
-                    if(type.equals("u")) {
+                    if(type == 1) {
                         User u = snapshot.toObject(User.class);
                         if (u != null) {
                             if (user == null) {
@@ -235,7 +264,7 @@ public class Repository {
                             user.setValue(u);
                         }
                     }
-                    if(type.equals("m")) {
+                    if(type == 2) {
                         Mood m = snapshot.toObject(Mood.class);
                         if (m != null) {
                             if (mood == null) {
@@ -244,7 +273,7 @@ public class Repository {
                             mood.setValue(m);
                         }
                     }
-                    if(type.equals("s")) {
+                    if(type == 3) {
                         Support s = snapshot.toObject(Support.class);
                         if (s != null) {
                             if (support == null) {
@@ -297,4 +326,6 @@ public class Repository {
                     }
                 });
     }
+
+
 }

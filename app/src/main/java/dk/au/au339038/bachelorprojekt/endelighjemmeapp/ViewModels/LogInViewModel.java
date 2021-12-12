@@ -25,14 +25,11 @@ public class LogInViewModel extends ViewModel {
         return pin;
     }
 
-
-    public void setPin(Pin pin) {
-        repository.setPinAsynch(pin);
+    public void updatePin(Pin pin) {
+        repository.updatePinAsynch(pin);
     }
 
-    public void updateUser(User user){
-
-    }
+    public void deletePin (Pin pin) {repository.deletePinAsynch(pin);}
 
     public void loadUserData(String userId){
         repository.loadTheUser(userId);

@@ -13,14 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.NotDone.EditChildActivity;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.support.SupportActivity;
+import dk.au.au339038.bachelorprojekt.endelighjemmeapp.Other.FHApplication;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private Button supportBtn, childEdit;
+    private Button supportBtn, childEdit, consentBtn, changePinBtn;
     private Switch touch, face;
 
     @Override
@@ -42,6 +44,22 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                goToChildEdit();
                   }
+        });
+
+        consentBtn = findViewById(R.id.drawConsentBtn);
+        consentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.drawConsentBtn) + " " +  getText(R.string.not_implemented),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        changePinBtn = findViewById(R.id.changePinBtn);
+        changePinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FHApplication.getAppContext(), getText(R.string.changePinBtn) + " " +  getText(R.string.not_implemented),Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

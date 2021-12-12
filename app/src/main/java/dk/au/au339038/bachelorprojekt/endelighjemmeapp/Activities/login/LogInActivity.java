@@ -28,10 +28,8 @@ public class LogInActivity extends AppCompatActivity {
     private LogInViewModel lvm;
     private LiveData<Pin> pin;
     private Pin thepin;
-    private String _pin;
     private Button logInButton, changePin;
     private EditText userText;
-    private String userId;
     private int wrongPin;
 
 
@@ -41,26 +39,19 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        wrongPin = 0;
         logInButton = findViewById(R.id.logInBtn);
         userText = findViewById(R.id.pinText);
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
-        //Hvis vi havde implementeret oprettelsen af Pinkode, ville dette være unødvendigt.
-        if(thepin == null) {
-            loadTestUser(thepin);
-        }
-
         pin = lvm.getPin();
         pin.observe(this, new Observer<Pin>() {
             @Override
             public void onChanged(Pin newpin) {
-                _pin = newpin.getPin();
+               // _pin = newpin.getPin();
                 thepin = newpin;
             }
         });
-
 
         changePin = findViewById(R.id.newPasswordBtn);
         changePin.setOnClickListener(new View.OnClickListener() {
@@ -74,29 +65,36 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = userText.getText().toString();
-                if(s.equals("")){
-                    wrongPin++;
+                /*if(s.equals("")){
+                    wrongPin = pin.getValue().getWrongPinCount();
+                    wrongPin ++;
+                    pin.getValue().setWrongPinCount(wrongPin);
+                    lvm.updatePin(pin.getValue());
                     Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_LONG).show();
-                }
-                else {
-                    int i = validatePin(s);
-                    if (i == 1) {
-                        goToMain();
-                        //finish();
-                    }
-                    if (i == 0) {
-                        wrongPin++;
-                        Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
+                }*/
 
-                    }
+                int i = validatePin(s);
+                if (i == 1) {
+                        wrongPin = 0;
+                        pin.getValue().setWrongPinCount(wrongPin);
+                        lvm.updatePin(pin.getValue());
+                        goToMain();
                 }
-                if (wrongPin>=3){
+                if (i == 0) {
+                        wrongPin = pin.getValue().getWrongPinCount();
+                        wrongPin++;
+                        pin.getValue().setWrongPinCount(wrongPin);
+                        lvm.updatePin(pin.getValue());
+                        Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
+                }
+                if (pin.getValue().getWrongPinCount()>=3){
+                    lvm.deletePin(pin.getValue());
+                    thepin = null;
                     toNemID();
+                    finish();
                 }
             }
         });
-
-
     }
 
     private void goToMain() {
@@ -107,6 +105,7 @@ public class LogInActivity extends AppCompatActivity {
         b.putSerializable("userID", userId);
         i.putExtras(b);
         launcher.launch(i);
+        finish();
     }
 
     private void toNemID(){
@@ -130,20 +129,13 @@ public class LogInActivity extends AppCompatActivity {
                 }
             });
 
-    public int validatePin(String pin) {
-        if(pin.equals(_pin)){
+    public int validatePin(String incomingpin) {
+        if(incomingpin.equals(pin.getValue().getPin())){
             return 1;
         }
         else {
             return 0;
         }
-    }
-
-   private void loadTestUser(Pin p){
-        //if(p==null){
-        thepin = new Pin("123456","0101907652");
-        lvm.setPin(thepin);
-       // }
     }
 
     @Override

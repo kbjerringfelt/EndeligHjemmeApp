@@ -71,6 +71,7 @@
    <string name="spinnerDefault">Sort by area:</string>
     <string name="drawConsentBtn">Withdraw consent</string>
     <string name="changePinBtn">Change pin</string>
+    <string name="cantgoback">Cannot go back</string>
 
 
 </resources>
