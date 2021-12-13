@@ -17,10 +17,11 @@ public class MoodViewModel extends ViewModel {
     public MoodViewModel(){
         repository = Repository.getInstance();
         user = repository.getUser();
-        mood = repository.getMood();
+
     }
 
     public LiveData<Mood> getMood() {
+        mood = repository.getMood();
         if(mood == null){
             mood = new MutableLiveData<Mood>();
             Mood defaultMood = new Mood(11);

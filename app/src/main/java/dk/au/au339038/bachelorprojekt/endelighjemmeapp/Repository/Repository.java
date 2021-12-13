@@ -120,10 +120,6 @@ public class Repository {
     }
 
     public MutableLiveData<Mood> getMood() {
-        loadDocument("mood"+user.getValue().getId().toString(), dateOnly, 2);
-        if(mood == null){
-            mood = new MutableLiveData<>();
-        }
         return mood;}
 
     public LiveData<ArrayList<Advice>> getAdvice() {
@@ -132,6 +128,7 @@ public class Repository {
 
     public void loadTheUser(String userId){
         loadDocument("users", userId, 1);
+        loadDocument("mood"+userId, dateOnly, 2);
     }
 
     public LiveData<User> getUser(){

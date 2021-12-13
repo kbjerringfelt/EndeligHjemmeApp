@@ -138,8 +138,10 @@ public class MoodFragment extends Fragment {
             }
         });
 
+ //       updateUI(1, "");
+
         thisMood = mvm.getMood();
-        thisMood.observe(getActivity(), new Observer<Mood>() {
+        thisMood.observe(getViewLifecycleOwner(), new Observer<Mood>() {
             @Override
             public void onChanged(@Nullable Mood m) {
                 im = m.getMood();
