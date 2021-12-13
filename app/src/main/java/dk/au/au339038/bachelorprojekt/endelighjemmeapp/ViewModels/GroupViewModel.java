@@ -24,12 +24,6 @@ public class GroupViewModel extends ViewModel {
         communities = repository.getCommunities();
     }
 
-    public LiveData<ArrayList<Group>> getGroups() {
-        if(groups == null){
-            groups = new MutableLiveData<ArrayList<Group>>();
-        }
-        return groups;
-    }
     public LiveData<ArrayList<Group>> getGroupsForArea(String area) {
         groupsForArea = new MutableLiveData<ArrayList<Group>>();
         ArrayList<Group> newGroups = new ArrayList<Group>();

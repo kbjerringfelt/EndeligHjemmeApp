@@ -19,10 +19,10 @@ public class PsychViewModel extends ViewModel {
 
     public PsychViewModel(){
         repository = Repository.getInstance();
+        psychologists = repository.getPsychologists();
     }
 
      public LiveData<ArrayList<Psychologist>> getPsychologistsForArea(String area) {
-        psychologists = repository.getPsychologists();
         psychologistsForArea = new MutableLiveData<ArrayList<Psychologist>>();
         ArrayList<Psychologist> newPsychologists = new ArrayList<Psychologist>();
         for (Psychologist p : psychologists.getValue())
