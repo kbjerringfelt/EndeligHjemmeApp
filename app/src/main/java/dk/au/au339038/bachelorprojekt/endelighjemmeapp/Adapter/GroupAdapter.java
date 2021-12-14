@@ -14,6 +14,7 @@ import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Group;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
 
+//adapter til recyclerview for grupper
 public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHolder>{
     private ArrayList<Group> groupList;
     private GroupAdapter.IGroupItemClickedListener groupListener;
@@ -23,6 +24,7 @@ public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHo
         this.groupListener = groupListener;
     }
 
+    //opdaterer listen i recyclerview
     public void updateGroupList(ArrayList<Group> lists){
         groupList = lists;
         notifyDataSetChanged();
@@ -30,6 +32,7 @@ public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHo
 
 
 
+    //Sætter layout til item i recyclerview
     @NonNull
     @Override
     public GroupAdapter.GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,12 +42,14 @@ public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHo
         return gvh;
     }
 
+    //Putter data fra listen i layout
     @Override
     public void onBindViewHolder(@NonNull GroupAdapter.GroupViewHolder viewHolder, int position) {
         viewHolder.title.setText(groupList.get(position).getTitle());
         viewHolder.bdate.setText(groupList.get(position).getBdate());
     }
 
+    //Antal i listen
     @Override
     public int getItemCount() {
         if(groupList == null){
@@ -54,7 +59,7 @@ public class GroupAdapter extends  RecyclerView.Adapter<GroupAdapter.GroupViewHo
         }
     }
 
-    //Lavet ud fra PersonViewHolder i Lists and grids demoen
+    //Binder widgets til layout og siger hvad der skal ske ved klik
     public class GroupViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title, bdate;

@@ -55,14 +55,16 @@ public class Repository {
     private LiveData<Pin> _pin;
     private String dateOnly;
 
-    public static Repository getInstance(){
-        if(instance==null){
+    //Singleton pattern, sørger for, at der kun er en instans af repository
+    public static Repository getInstance() {
+        if (instance == null) {
             instance = new Repository();
         }
         return instance;
     }
 
-    private Repository(){
+    //Når repository oprettes gennemgås disse steps.
+    private Repository() {
         db = AppsDatabase.getDatabase(FHApplication.getAppContext());
         fdb = FirebaseFirestore.getInstance();
         executor = Executors.newSingleThreadExecutor();
@@ -79,33 +81,36 @@ public class Repository {
 
         //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
         Date currentDate = new Date();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
 
 
     }
 
-    private void loadTestUser(){
-        Pin thepin = new Pin("123456","0101907652", 0);
+    //Ville ikke være nødvendigt, hvis verificeringen med NemId var implementeret. Det er det ikke, så derfor laver jeg en bruger her.
+    private void loadTestUser() {
+        Pin thepin = new Pin("123456", "0101907652", 0);
         setPinAsynch(thepin);
     }
 
-    public LiveData<ArrayList<Psychologist>> getPsychologists(){
+    //Returnerer en liste af psykologer som livedata.
+    public LiveData<ArrayList<Psychologist>> getPsychologists() {
         return psychs;
     }
 
-    public LiveData<ArrayList<Group>> getGroups(){
+    //Returnerer en liste af grupper som livedata.
+    public LiveData<ArrayList<Group>> getGroups() {
         return groups;
     }
 
-    public LiveData<ArrayList<String>> getCommunities(){
-        if(lcommunities == null){
+    //Samler alle kommuner fra de forskellige regioner til en liste med kommnuer som livedata.
+    public LiveData<ArrayList<String>> getCommunities() {
+        if (lcommunities == null) {
             lcommunities = new MutableLiveData<ArrayList<String>>();
         }
         ArrayList<String> communities = new ArrayList<>();
-        for (Regions r : regions.getValue())
-        {
-            for(String s : r.getCommunities()){
+        for (Regions r : regions.getValue()) {
+            for (String s : r.getCommunities()) {
                 communities.add(s);
             }
         }
@@ -115,28 +120,36 @@ public class Repository {
         return lcommunities;
     }
 
-    public LiveData<Support> getSupport(){
+    // Returnerer support som livedata.
+    public LiveData<Support> getSupport() {
         return support;
     }
 
+    //Returnerer humør som livedata.
     public MutableLiveData<Mood> getMood() {
-        return mood;}
+        return mood;
+    }
 
+    //Returnerer råd som livedata.
     public LiveData<ArrayList<Advice>> getAdvice() {
         return advice;
     }
 
+    //Loader den bruger der er logget ind og dennes humør for i dag.
     public void loadTheUser(String userId){
         loadDocument("users", userId, 1);
         loadDocument("mood"+userId, dateOnly, 2);
     }
 
+    //Returnerer brugeren som livedata.
     public LiveData<User> getUser(){
         if(user == null){
             user = new MutableLiveData<User>();
         }
-        return user;}
+        return user;
+    }
 
+    //Returnerer pinkoden som livedata.
     public LiveData<Pin> getPin() {
         if (_pin == null) {
             _pin = new MutableLiveData<Pin>();
@@ -144,6 +157,7 @@ public class Repository {
         return _pin;
     }
 
+    //Sætter pinkoden asynkront via executor.
     public void setPinAsynch (Pin p){
         executor.execute(new Runnable() {
             @Override
@@ -153,6 +167,7 @@ public class Repository {
         });
     }
 
+    //Opdaterer pinkoden asynkront via executor.
     public void updatePinAsynch (Pin p){
         executor.execute(new Runnable() {
             @Override
@@ -162,6 +177,7 @@ public class Repository {
         });
     }
 
+    //Sletter pinkoden asynkront via executor.
     public void deletePinAsynch(Pin pin) {
         executor.execute(new Runnable() {
            @Override
@@ -171,7 +187,7 @@ public class Repository {
         });
     }
 
-    //Load data methods, from https://firebase.google.com/docs/firestore/query-data/get-data.
+    //Load collection metoder, fra https://firebase.google.com/docs/firestore/query-data/listen
     private void loadData(String collectionName, String type) {
         fdb.collection(collectionName)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -239,6 +255,7 @@ public class Repository {
                 });
     }
 
+    //Load dokument metoder, fra https://firebase.google.com/docs/firestore/query-data/listen
     private void loadDocument(String collectionName, String documentName, int type) {
         final DocumentReference docRef = fdb.collection(collectionName).document(documentName);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -291,24 +308,7 @@ public class Repository {
         });
     }
 
-    public void updateMood(String userid, String date, int moodToUpdate){
-        DocumentReference docRef = fdb.collection("mood"+userid).document(date);
-        docRef
-                .update("mood", moodToUpdate)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully updated!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
-
-    }
+    //Gem metoder, fra https://firebase.google.com/docs/firestore/manage-data/add-data
     public void saveMood(String userid, String date, int currentMood){
         Map<String, Object> mood = new HashMap<>();
         mood.put("mood", currentMood);

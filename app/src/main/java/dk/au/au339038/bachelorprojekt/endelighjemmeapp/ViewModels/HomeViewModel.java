@@ -17,6 +17,7 @@ public class HomeViewModel extends ViewModel {
         user = repository.getUser();
     }
 
+    //returnerer bruger som livedata
     public LiveData<User> getUser() {
         if(user == null){
             user= new MutableLiveData<User>();

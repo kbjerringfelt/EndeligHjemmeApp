@@ -1,5 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
+//Psykolog. Matcher databasen
 public class Psychologist {
     private String name, specialty, insurance, city, disability, education, language, moreinfo, sex, area;
     private long zip, phone, price;

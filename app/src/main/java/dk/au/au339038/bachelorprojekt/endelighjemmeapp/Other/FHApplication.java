@@ -3,6 +3,7 @@ package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Other;
 import android.app.Application;
 import android.content.Context;
 
+//Sørger for der refereres til samme applikation
 public class FHApplication extends Application {
 
     private static FHApplication instance; //the one application object for the application's life time

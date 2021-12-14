@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Advice;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
+//Adapter til gode råd recyclerview
 public class AdviceAdapter extends  RecyclerView.Adapter<AdviceAdapter.AdviceViewHolder>{
 
     private ArrayList<Advice> adviceList;
@@ -23,6 +24,7 @@ public class AdviceAdapter extends  RecyclerView.Adapter<AdviceAdapter.AdviceVie
         this.adviceListener = adviceListener;
     }
 
+    //opdaterer listen i recyclerview
     public void updateAdviceList(ArrayList<Advice> lists){
         adviceList = lists;
         notifyDataSetChanged();
@@ -30,6 +32,7 @@ public class AdviceAdapter extends  RecyclerView.Adapter<AdviceAdapter.AdviceVie
 
 
 
+    //Sætter hvordan item på recyclerview skal se ud. Hvilket layout
     @NonNull
     @Override
     public AdviceAdapter.AdviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,12 +42,14 @@ public class AdviceAdapter extends  RecyclerView.Adapter<AdviceAdapter.AdviceVie
         return avh;
     }
 
+    //Sætter widgets
     @Override
     public void onBindViewHolder(@NonNull AdviceAdapter.AdviceViewHolder viewHolder, int position) {
         viewHolder.title.setText(adviceList.get(position).getTitle());
 
     }
 
+    //Hvor mange items på listen
     @Override
     public int getItemCount() {
         if(adviceList == null){
@@ -54,7 +59,7 @@ public class AdviceAdapter extends  RecyclerView.Adapter<AdviceAdapter.AdviceVie
         }
     }
 
-    //Lavet ud fra PersonViewHolder i Lists and grids demoen
+    //Binder widgets til layout og siger hvad der skal ske ved klik
     public class AdviceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView title;

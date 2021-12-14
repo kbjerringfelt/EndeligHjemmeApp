@@ -22,6 +22,7 @@ public class PsychViewModel extends ViewModel {
         psychologists = repository.getPsychologists();
     }
 
+    //Returnerer psykologer for den valgte kommune, eller default brugerens kommune som livedata liste.
      public LiveData<ArrayList<Psychologist>> getPsychologistsForArea(String area) {
         psychologistsForArea = new MutableLiveData<ArrayList<Psychologist>>();
         ArrayList<Psychologist> newPsychologists = new ArrayList<Psychologist>();
@@ -35,6 +36,7 @@ public class PsychViewModel extends ViewModel {
         return psychologistsForArea;
     }
 
+    //returnerer bruger som livedata.
     public LiveData<User> getUser(){
         user = repository.getUser();
         if (user == null){
@@ -43,6 +45,7 @@ public class PsychViewModel extends ViewModel {
         return user;
     }
 
+    //Returnerer kommune livedata
     public LiveData<ArrayList<String>> getCommunities(){
         communities = repository.getCommunities();
         if (communities == null){

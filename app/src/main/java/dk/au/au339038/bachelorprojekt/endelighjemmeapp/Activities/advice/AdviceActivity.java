@@ -42,6 +42,7 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
 
         avm = new ViewModelProvider(this).get(AdviceViewModel.class);
 
+        //Adapter for recyclerview
         adviceAdapter = new AdviceAdapter(this);
         arcv = findViewById(R.id.rcv_advice);
         arcv.setLayoutManager(new LinearLayoutManager(this));
@@ -49,6 +50,7 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
 
         advice = new ArrayList<Advice>();
 
+        //Observerer gode råd
         ladvice = avm.getAdvice();
         ladvice.observe(this, new Observer<ArrayList<Advice>>() {
             @Override
@@ -60,6 +62,7 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
 
     }
 
+    //Launcher til at launche aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -77,12 +80,14 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
                 }
             });
 
+    //Menu i toppen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
         return true;
     }
 
+    //Tryk på menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -94,19 +99,20 @@ public class AdviceActivity extends AppCompatActivity implements AdviceAdapter.I
         return super.onOptionsItemSelected(item);
     }
 
+    //Valgt godt råd
     @Override
     public void onAdviceClicked(int index) {
         ArrayList<Advice> ml = ladvice.getValue();
         showDialogue(ml.get(index));
     }
 
+    //Åbner link i browser Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
    private void goToLink(String link){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
         launcher.launch(browserIntent);
     }
 
-    //show a dialogue
-    //Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
+    //dialog
     private void showDialogue(Advice a){
         //create a dialogue popup - and show it
        AlertDialog.Builder builder = new AlertDialog.Builder(this)

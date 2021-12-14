@@ -17,6 +17,7 @@ public class SupportViewModel extends ViewModel {
         support = repository.getSupport();
     }
 
+    //Returnerer support livedata
     public LiveData<Support> getSupport() {
         if (support == null) {
             support = new MutableLiveData<Support>();
@@ -24,8 +25,8 @@ public class SupportViewModel extends ViewModel {
         return support;
     }
 
-    public void setSupport(LiveData<Support> support) {
-        this.support = support;
-    }
+    //public void setSupport(LiveData<Support> support) {
+      //  this.support = support;
+    //}
 }
 

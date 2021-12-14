@@ -28,6 +28,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        //Knapper forbindes med widgets i layoutet og besked om hvad der skal ske ved tryk
         psych = findViewById(R.id.list_btn_psych);
         psych.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +117,7 @@ public class MenuActivity extends AppCompatActivity {
         launcher.launch(intent);
     }
 
+    //Advarsel når man logger ud, for at bekræfte valget
     private void logOut(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setMessage(R.string.logoutDialog)
@@ -125,6 +127,7 @@ public class MenuActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    //Logger ud ved at gå til log ind og afslutte log ud aktiviteten
     private void goToLogIn(){
 
         Intent intent = new Intent();
@@ -135,7 +138,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
 
-    //Også lavet ud fra samme metode i Test12 demo
+    //Launcher launcher aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

@@ -18,6 +18,7 @@ public class AdviceViewModel extends ViewModel {
         advice = repository.getAdvice();
     }
 
+    //returnerer livedata liste gode råd
     public LiveData<ArrayList<Advice>> getAdvice() {
         if(advice == null){
             advice = new MutableLiveData<ArrayList<Advice>>();
@@ -25,7 +26,4 @@ public class AdviceViewModel extends ViewModel {
         return advice;
     }
 
-    public void setAdvice(LiveData<ArrayList<Advice>> advice) {
-        this.advice = advice;
-    }
 }

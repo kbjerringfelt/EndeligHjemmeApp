@@ -86,13 +86,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+ // launcher support aktivitet
     private void goToSupportActivity() {
         Intent intent = new Intent(this, SupportActivity.class);
         launcher.launch(intent);
     }
 
-
+//Launcher til at launche aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

@@ -56,18 +56,22 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_list);
 
+        //viewmodel
         gvm = new ViewModelProvider(this).get(GroupViewModel.class);
 
+        //Adapter for recyclerview
         groupAdapter = new GroupAdapter(this);
         grcv = findViewById(R.id.rcv_group);
         grcv.setLayoutManager(new LinearLayoutManager(this));
         grcv.setAdapter(groupAdapter);
 
+        //Widgets
         textView = findViewById(R.id.textViewgroup);
         groups = new ArrayList<Group>();
         communities = new ArrayList<String>();
 
 
+        //Bruger
         user = gvm.getUser();
         user.observe(this, new Observer<User>() {
             @Override
@@ -76,6 +80,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
             }
         });
 
+        //Kommuner
         lcommunities = gvm.getCommunities();
         lcommunities.observe(this, new Observer<ArrayList<String>>() {
             @Override
@@ -86,6 +91,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
             }
         });
 
+        //Opret gruppe knap
         createBtn = findViewById(R.id.createBtn);
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +102,13 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
 
     }
 
+    //Opret gruppe
     private void goToCreateGroup() {
         Intent intent = new Intent(this, CreateGroupActivity.class);
         launcher.launch(intent);
     }
 
+    //Hjælper med at åbne aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -118,6 +126,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
                 }
             });
 
+    //Opdaterer listen alt efter hvilken kommune er valgt.
     private void updateList(String area){
         if(area.equals(getText(R.string.spinnerDefault))){area = user.getValue().getArea();}
         lgroups = gvm.getGroupsForArea(area);
@@ -137,6 +146,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
 
     }
 
+    //item valgt i spinner/drop down menu
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
@@ -147,12 +157,15 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         updateList(user.getValue().getArea());
     }
 
+
+    //Menu i toppen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
         return true;
     }
 
+    //Klik på menu i toppen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -163,13 +176,14 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         return super.onOptionsItemSelected(item);
     }
 
+    //Klik på en gruppe
     @Override
     public void onGroupClicked(int index) {
         ArrayList<Group> ml = groups;
         showDialogue(ml.get(index));
     }
 
-    //show a dialogue
+    //Vis dialog
     private void showDialogue(Group g){
         //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -185,7 +199,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         builder.create().show();
     }
 
-    //Spinner in this class is based on the toturial from: https://www.tutorialspoint.com/android/android_spinner_control.htm
+    //Spinner lavet ud fra toturial fra: https://www.tutorialspoint.com/android/android_spinner_control.htm
     private void setUpSpinner(){
         // Spinner element
         spinner = (Spinner) findViewById(R.id.groupSpinner);
@@ -203,6 +217,7 @@ public class GroupListActivity extends AppCompatActivity implements GroupAdapter
         spinner.setAdapter(dataAdapter);
 
     }
+
 
     private void signUpForGroup() {
         Toast.makeText(FHApplication.getAppContext(), getText(R.string.signUpGroup)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();

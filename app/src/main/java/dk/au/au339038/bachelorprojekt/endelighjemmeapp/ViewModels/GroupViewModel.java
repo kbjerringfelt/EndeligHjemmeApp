@@ -24,6 +24,7 @@ public class GroupViewModel extends ViewModel {
         communities = repository.getCommunities();
     }
 
+    //Returnerer livedata liste med grupper for valgte kommune
     public LiveData<ArrayList<Group>> getGroupsForArea(String area) {
         groupsForArea = new MutableLiveData<ArrayList<Group>>();
         ArrayList<Group> newGroups = new ArrayList<Group>();
@@ -37,6 +38,7 @@ public class GroupViewModel extends ViewModel {
         return groupsForArea;
     }
 
+    //returnerer bruger
     public LiveData<User> getUser(){
         if (user == null){
             user = new MutableLiveData<User>();
@@ -44,6 +46,7 @@ public class GroupViewModel extends ViewModel {
         return user;
     }
 
+    //Returnerer kommuner i liste livedata
     public LiveData<ArrayList<String>> getCommunities(){
         if (communities == null){
             communities = new MutableLiveData<ArrayList<String>>();

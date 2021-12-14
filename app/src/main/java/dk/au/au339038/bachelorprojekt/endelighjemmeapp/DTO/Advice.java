@@ -1,5 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
+//Råd. Matcher databasen
 public class Advice {
 
     private String text;

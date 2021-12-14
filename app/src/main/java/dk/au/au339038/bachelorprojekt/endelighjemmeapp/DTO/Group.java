@@ -1,5 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
+//Gruppe. Matcher databasen
 public class Group {
     private String title, bdate, contact, place, description, area;
     private int phone;

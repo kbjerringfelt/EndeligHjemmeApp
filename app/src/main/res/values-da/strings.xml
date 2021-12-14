@@ -70,7 +70,7 @@
     <string name="goToLink">Åben link</string>
     <string name="noDataArea">Ingen i denne kommune.</string>
     <string name="spinnerDefault">Sorter efter kommune:</string>
-    <string name="drawConsentBtn">Slet sammentykke</string>
+    <string name="drawConsentBtn">Slet samtykke</string>
     <string name="changePinBtn">Skift pinkode</string>
     <string name="cantgoback">Kan ikke gå længere tilbage.</string>
 

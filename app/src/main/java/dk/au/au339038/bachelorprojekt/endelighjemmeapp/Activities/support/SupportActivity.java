@@ -1,11 +1,16 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.Activities.support;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +37,7 @@ public class SupportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
 
+        //Widgets
         faqTxt = findViewById(R.id.faqTxt);
         faqLink = findViewById(R.id.faqLink);
         furtherHelp = findViewById(R.id.suppotContactTxt);
@@ -43,6 +49,7 @@ public class SupportActivity extends AppCompatActivity {
 
         support = new Support();
 
+        //Observerer support info
         lsupport = svm.getSupport();
         lsupport.observe(this, new Observer<Support>() {
             @Override
@@ -53,19 +60,31 @@ public class SupportActivity extends AppCompatActivity {
             }
         });
 
+        //Ønske knap
         wishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(FHApplication.getAppContext(), getText(R.string.wishButton)+ " " + getText(R.string.not_implemented), Toast.LENGTH_SHORT).show();
             }
         });
+
+        //Trykke på link
+        faqLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLink(faqLink.getText().toString());
+            }
+        });
     }
+
+    //Menu i toppen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
         return true;
     }
 
+    //Klik på menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -80,4 +99,28 @@ public class SupportActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Åbner link i browser Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
+    private void goToLink(String link){
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        launcher.launch(browserIntent);
+    }
+
+    //Launcher til link
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        Bundle b = data.getExtras();
+                        int j = b.getInt("int");
+                        if (j == 1){
+                            finish();
+                        }
+
+                    }
+                }
+            });
 }

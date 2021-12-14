@@ -49,17 +49,23 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_psychologist);
 
+        //Viewmodel for aktiviteten
         pvm = new ViewModelProvider(this).get(PsychViewModel.class);
+
+        //Forbindes med widgets
         textView = findViewById(R.id.textViewpsych);
 
+        //Adapter for recyclerviewet
         psychAdapter = new PsychAdapter(this);
         prcv = findViewById(R.id.rcv_psych);
         prcv.setLayoutManager(new LinearLayoutManager(this));
         prcv.setAdapter(psychAdapter);
 
+        //Lister
         psychologists = new ArrayList<Psychologist>();
         communities = new ArrayList<String>();
 
+        //Brugeren
         user = pvm.getUser();
         user.observe(this, new Observer<User>() {
             @Override
@@ -68,12 +74,13 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
             }
         });
 
+        //Kommuner til drop down menu
         lcommunities = pvm.getCommunities();
         lcommunities.observe(this, new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> ncommunities) {
                 communities = ncommunities;
-                //default choice in spinner: https://www.tutorialspoint.com/how-to-make-an-android-spinner-with-initial-default-text
+                //default valg i spinner: https://www.tutorialspoint.com/how-to-make-an-android-spinner-with-initial-default-text
                 communities.add(0, "" + getText(R.string.spinnerDefault));
                 setUpSpinner();
             }
@@ -81,6 +88,7 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
     }
 
+    //Metode opdaterer listen i recyclerview efter valg i dropdown (spinner)
     private void updateList(String area){
         if(area.equals(getText(R.string.spinnerDefault))){area = user.getValue().getArea();}
         LiveData<ArrayList<Psychologist>> newlpsychologists = new MutableLiveData<>();
@@ -101,22 +109,26 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
 
     }
 
+    //Vælg item fra drop down menu
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         updateList(item);
 
     }
+    //Ingen valgt i spinner/dropdown
     public void onNothingSelected(AdapterView<?> arg0) {
         updateList(user.getValue().getArea());
     }
 
+    //Menu i toppen af applikationen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
         return true;
     }
 
+    //Klik på menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -128,12 +140,13 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         return super.onOptionsItemSelected(item);
     }
 
+    //Vælg psykolog på listen
     @Override
     public void onPsychologistClicked(int index) {
         showDialogue(psychologists.get(index));
     }
 
-    //show a dialogue
+    //Dialog der bliver vist ved valgt psykolog
     private void showDialogue(Psychologist psychologist){
         //create a dialogue popup - and show it
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -152,7 +165,7 @@ public class PsychListActivity extends AppCompatActivity implements PsychAdapter
         builder.create().show();
     }
 
-    //Spinner in this class is based on the toturial from: https://www.tutorialspoint.com/android/android_spinner_control.htm
+    //Spinner lavet ud fra toturial fra: https://www.tutorialspoint.com/android/android_spinner_control.htm
     private void setUpSpinner(){
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.psychSpinner);

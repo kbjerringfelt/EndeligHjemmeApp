@@ -47,6 +47,7 @@ public class HomeFragment extends Fragment {
 
         hvm = new ViewModelProvider(this).get(HomeViewModel.class);
 
+        //Sørger for at personliggøre hjemmeskærmen
         user = hvm.getUser();
         user.observe(this.getViewLifecycleOwner(), new Observer<User>() {
             @Override

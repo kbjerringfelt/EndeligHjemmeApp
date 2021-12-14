@@ -1,5 +1,5 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
-
+//Humør. Matcher databasen
 public class Mood {
     private int mood;
     //private String date;

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Psychologist;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.R;
 
+//Adapter til recyclerview i psykolog aktivitet
 public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHolder>{
 
     private ArrayList<Psychologist> mhpList;
@@ -23,6 +24,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         this.psychListener = psychListener;
     }
 
+    //Opdaterer listen i recyclerview
     public void updateMHPList(ArrayList<Psychologist> lists){
         mhpList = lists;
         notifyDataSetChanged();
@@ -30,6 +32,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
 
 
 
+    //Sætter item layout i recyclerview
     @NonNull
     @Override
     public PsychViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,6 +42,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         return mvh;
     }
 
+    //Sætter information fra listen i widgets
     @Override
     public void onBindViewHolder(@NonNull PsychViewHolder viewHolder, int position) {
         viewHolder.name.setText(mhpList.get(position).getName());
@@ -47,6 +51,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
 
     }
 
+    //Hvor mange item i listen
     @Override
     public int getItemCount() {
         if(mhpList == null){
@@ -56,7 +61,7 @@ public class PsychAdapter extends  RecyclerView.Adapter<PsychAdapter.PsychViewHo
         }
     }
 
-    //Lavet ud fra PersonViewHolder i Lists and grids demoen
+    //Binder widgets til layout og siger hvad der skal ske ved klik
     public class PsychViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView name, specialty, city, insurance;

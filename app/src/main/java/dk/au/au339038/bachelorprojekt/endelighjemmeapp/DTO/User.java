@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 
+//Bruger. Matcher databasen
 public class User {
     //Christina, barn 8 uger, hedder julie, født 28+4.
 

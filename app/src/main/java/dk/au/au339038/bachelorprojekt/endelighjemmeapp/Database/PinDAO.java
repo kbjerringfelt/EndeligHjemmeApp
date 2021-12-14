@@ -15,6 +15,7 @@ import java.util.List;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 
+//Dao til at indsætte i databasen
 @Dao
 public interface PinDAO {
 

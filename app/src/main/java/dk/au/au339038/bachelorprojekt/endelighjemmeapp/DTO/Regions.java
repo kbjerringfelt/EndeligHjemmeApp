@@ -1,7 +1,7 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
 import java.util.ArrayList;
-
+//Regioner. Matcher databasen
 public class Regions {
 
     private String region;

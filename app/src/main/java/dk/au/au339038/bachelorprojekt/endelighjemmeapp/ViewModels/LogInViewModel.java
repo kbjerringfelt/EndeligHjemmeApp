@@ -18,6 +18,7 @@ public class LogInViewModel extends ViewModel {
         pin = repository.getPin();
     }
 
+    //Returnerer pinkoden som livedata
     public LiveData<Pin> getPin() {
         if(pin == null){
             pin= new MutableLiveData<Pin>();
@@ -25,12 +26,15 @@ public class LogInViewModel extends ViewModel {
         return pin;
     }
 
+    //Updaterer pinkoden
     public void updatePin(Pin pin) {
         repository.updatePinAsynch(pin);
     }
 
+    //Sletter pinkode
     public void deletePin (Pin pin) {repository.deletePinAsynch(pin);}
 
+    //Loader data for den bruger, der er logget ind
     public void loadUserData(String userId){
         repository.loadTheUser(userId);
     }

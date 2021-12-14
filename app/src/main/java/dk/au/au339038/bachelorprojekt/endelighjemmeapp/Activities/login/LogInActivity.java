@@ -39,19 +39,21 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        //Finder widgets i layout
         logInButton = findViewById(R.id.logInBtn);
         userText = findViewById(R.id.pinText);
 
         lvm = new ViewModelProvider(this).get(LogInViewModel.class);
 
+        //Observerer pinkoden
         pin = lvm.getPin();
         pin.observe(this, new Observer<Pin>() {
             @Override
             public void onChanged(Pin newpin) {
-               // _pin = newpin.getPin();
                 thepin = newpin;
             }
         });
+
 
         changePin = findViewById(R.id.newPasswordBtn);
         changePin.setOnClickListener(new View.OnClickListener() {
@@ -61,18 +63,22 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
+        //Logind knap. Registrerer et klik.
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String s = userText.getText().toString();
                 int i = validatePin(s);
+                //Tjekker hvor mange gange pinkoden er tastet forkert, hvis den er <=2 går den in i denne løkke
                 if(pin.getValue().getWrongPinCount()<=2) {
+                    //Hvis validate har returnereret 1 kan man logge på.
                     if (i == 1) {
                         wrongPin = 0;
                         pin.getValue().setWrongPinCount(wrongPin);
                         lvm.updatePin(pin.getValue());
                         goToMain();
                     }
+                    //Hvis validate returnerer 0 kommer der fejlmeddelelser, og antal forkerte forsøg øges med 1
                     if (i == 0) {
                         wrongPin = pin.getValue().getWrongPinCount();
                         wrongPin++;
@@ -81,6 +87,7 @@ public class LogInActivity extends AppCompatActivity {
                         Toast.makeText(FHApplication.getAppContext(), R.string.wrong_pin, Toast.LENGTH_SHORT).show();
                     }
                 }
+                //Hvis antal forkerte forsøg er >=3 bliver pinkoden slettet i databasen og man logges ud til NemId verificering
                 if (pin.getValue().getWrongPinCount()>=3){
                     lvm.deletePin(pin.getValue());
                     thepin = null;
@@ -91,6 +98,7 @@ public class LogInActivity extends AppCompatActivity {
         });
     }
 
+    //Åbner Hjemme aktiviteten
     private void goToMain() {
         lvm.loadUserData(thepin.getUid());
         String userId = thepin.getUid();
@@ -101,13 +109,14 @@ public class LogInActivity extends AppCompatActivity {
         launcher.launch(i);
     }
 
+    //Åbner NemId aktiviteten
     private void toNemID(){
         Intent intent = new Intent(this, NemIdActivity.class);
         launcher.launch(intent);
         finish();
     }
 
-    //Also from Test12 demo
+    //Launcher hjælper med at launche aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -122,6 +131,7 @@ public class LogInActivity extends AppCompatActivity {
                 }
             });
 
+    //Tjekker at den indtastede pinkode er den samme som den i databasen.
     public int validatePin(String incomingpin) {
         if(incomingpin.equals(pin.getValue().getPin())){
             return 1;
@@ -131,6 +141,7 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    //Bestemmer hvad der sker, når der trykkes på tilbage pilen.
     @Override
     public void onBackPressed() {
         finish();

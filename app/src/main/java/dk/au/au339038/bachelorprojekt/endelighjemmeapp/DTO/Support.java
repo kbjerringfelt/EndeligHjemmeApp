@@ -1,5 +1,6 @@
 package dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO;
 
+//Support. Matcher databasen
 public class Support {
     private int phone;
     private String phoneHours;

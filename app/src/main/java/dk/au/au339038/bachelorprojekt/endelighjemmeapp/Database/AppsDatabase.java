@@ -9,12 +9,14 @@ import androidx.room.RoomDatabase;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.Pin;
 import dk.au.au339038.bachelorprojekt.endelighjemmeapp.DTO.User;
 
+
 @Database(entities = {Pin.class}, version = 11)
 public abstract class AppsDatabase extends RoomDatabase {
 
     public abstract PinDAO pinDAO();  //mandatory DAO getter
     private static AppsDatabase instance; //database instance for singleton
 
+    //Singleton for Room database. Sørger for samme database
     public static AppsDatabase getDatabase(final Context context) {
         if (instance == null) {
             synchronized (AppsDatabase.class) {

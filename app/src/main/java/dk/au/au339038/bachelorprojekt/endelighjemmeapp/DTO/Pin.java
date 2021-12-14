@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+//Pinkode. Det der bliver puttet i room databasen
 @Entity
 public class Pin{
     @PrimaryKey( autoGenerate = false)

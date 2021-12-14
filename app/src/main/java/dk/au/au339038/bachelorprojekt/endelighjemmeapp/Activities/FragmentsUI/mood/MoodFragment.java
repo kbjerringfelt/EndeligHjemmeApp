@@ -59,6 +59,7 @@ public class MoodFragment extends Fragment {
         View root = binding.getRoot();
 
 
+        //Finder widgets fra layout
         moodNumber = binding.resultTxt;
         moodImage = binding.smileyView;
         saveBtn = binding.moodSaveBtn;
@@ -69,16 +70,18 @@ public class MoodFragment extends Fragment {
         enteredMood = binding.textEnteredMood;
 
 
-        //copied from: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
+        //Kopieret fra: https://www.codegrepper.com/code-examples/java/java+get+current+date+without+time
         Date currentDate = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
         dateOnly = dateFormat.format(currentDate);
         moodDate.setText(dateOnly);
 
 
+        //Viewmodel
         mvm = new ViewModelProvider(this).get(MoodViewModel.class);
 
 
+        //Reagerer på ændringer på seekbaren
         moodSkb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -99,6 +102,7 @@ public class MoodFragment extends Fragment {
             }
         });
 
+        //Gem humør knap. En dialog popper up, hvis man gar gemt i forvejen.
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +122,7 @@ public class MoodFragment extends Fragment {
             }
         });
 
+        //Launcher aktiviteter
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -130,6 +135,7 @@ public class MoodFragment extends Fragment {
                     }
                 });
 
+        //Knap til at se oversigt over humører. ikke implementeret
         overviewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,8 +144,8 @@ public class MoodFragment extends Fragment {
             }
         });
 
- //       updateUI(1, "");
 
+        //Observerer om man har ændret humøret - ikke gemt. For at holde styr på lifecycle i android studio. f.eks. hvis devicet roterer.
         thisMood = mvm.getMood();
         thisMood.observe(getViewLifecycleOwner(), new Observer<Mood>() {
             @Override
@@ -154,13 +160,10 @@ public class MoodFragment extends Fragment {
                 }
             }
         });
-
-
-
         return root;
     }
 
-
+    //Gemmer humøret i databasen
     private void saveMood(Mood m) {
         im = m.getMood();
         mvm.saveMood(dateOnly, m);
@@ -168,13 +171,7 @@ public class MoodFragment extends Fragment {
         updateUI(m.getMood(), getText(R.string.alreadySavedMood).toString());
     }
 
-    /*private void updateMood(Mood m) {
-        im = m.getMood();
-        mvm.updateMood(dateOnly, m);
-        Toast.makeText(FHApplication.getAppContext(),getText(R.string.moodSaved),Toast.LENGTH_SHORT).show();
-        updateUI(m.getMood(), getText(R.string.alreadySavedMood).toString());
-    }*/
-
+    //Opdaterer UI med det Humøret
     private void updateUI(int i, String alreadyMood) {
         int mi = (i-1);
         moodSkb.setProgress(mi);
@@ -191,6 +188,7 @@ public class MoodFragment extends Fragment {
         binding = null;
     }
 
+    //Sætter smiley passende til humør
     private void setImage(int i){
         if (i == 1){
             moodImage.setImageResource(R.mipmap.ic_mood_1);

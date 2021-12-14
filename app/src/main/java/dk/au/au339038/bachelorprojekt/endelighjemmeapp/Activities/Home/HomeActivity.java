@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Menuen i bunden af aktiviteten
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home,R.id.navigation_calendar, R.id.navigation_chat, R.id.navigation_mood)
@@ -43,12 +44,14 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    //Menuen i toppen af aktiviteten
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main_top,menu);
         return true;
     }
 
+    //Menuen i toppen af aktiviteten
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -62,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    //Launcher nye aktiviteter
     ActivityResultLauncher<Intent> launcher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -80,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             });
 
+    //Sørger for, at man ikke kan gå tilbage fra hjemmeskærmen, og at brugeren får en besked om dette
     @Override
     public void onBackPressed() {
         Toast.makeText(FHApplication.getAppContext(),getText(R.string.cantgoback),Toast.LENGTH_SHORT).show();
