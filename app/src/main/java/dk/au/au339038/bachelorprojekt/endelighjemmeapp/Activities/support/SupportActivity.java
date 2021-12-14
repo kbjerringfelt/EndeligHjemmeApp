@@ -68,13 +68,6 @@ public class SupportActivity extends AppCompatActivity {
             }
         });
 
-        //Trykke på link
-        faqLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToLink(faqLink.getText().toString());
-            }
-        });
     }
 
     //Menu i toppen
@@ -100,27 +93,4 @@ public class SupportActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Åbner link i browser Method to open link: https://stackoverflow.com/questions/2201917/how-can-i-open-a-url-in-androids-web-browser-from-my-application?page=1&tab=votes#tab-top
-    private void goToLink(String link){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-        launcher.launch(browserIntent);
-    }
-
-    //Launcher til link
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK) {
-                        Intent data = result.getData();
-                        Bundle b = data.getExtras();
-                        int j = b.getInt("int");
-                        if (j == 1){
-                            finish();
-                        }
-
-                    }
-                }
-            });
 }
