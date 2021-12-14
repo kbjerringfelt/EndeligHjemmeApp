@@ -25,8 +25,5 @@ public class SupportViewModel extends ViewModel {
         return support;
     }
 
-    //public void setSupport(LiveData<Support> support) {
-      //  this.support = support;
-    //}
 }
 
